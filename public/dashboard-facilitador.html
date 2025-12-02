@@ -1100,3 +1100,1077 @@
         }
     </style>
 </head>
+
+<body>
+    <!-- 
+        DASHBOARD DEL FACILITADOR - SPRINT 2
+        US-045: Crear microtareas prácticas
+        US-046: Verificar evidencias de tareas
+        US-047: Consultar reportes de efectividad
+        US-051: Crear y gestionar grupos de aprendizaje
+        US-052: Enviar anuncios y mensajes motivacionales
+        US-053: Invitar y asociar alumnos mediante código/link
+        US-054: Enviar retroalimentación sobre la plataforma
+        US-057: Crear microtareas con editor visual
+        US-058: Revisar evidencias en galería visual
+        US-059: Ver progreso de alumnos en tablero
+        US-060: Ver calendario de microtareas asignadas
+    -->
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar__header">
+                <img src="assets/images/SumakLogo_.png" alt="SUMAK" class="sidebar__logo">
+                <span class="sidebar__brand">SUMAK</span>
+            </div>
+
+            <nav class="sidebar__nav">
+                <a href="#" class="sidebar__link sidebar__link--active" data-tab="inicio">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    </svg>
+                    <span>Inicio</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="alumnos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 010 7.75"/>
+                    </svg>
+                    <span>Mis Alumnos</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="grupos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span>Grupos</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="tareas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="12" y1="18" x2="12" y2="12"/>
+                        <line x1="9" y1="15" x2="15" y2="15"/>
+                    </svg>
+                    <span>Microtareas</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="evidencias">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Evidencias</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="kanban">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="6" height="18" rx="1"/>
+                        <rect x="9" y="6" width="6" height="12" rx="1"/>
+                        <rect x="15" y="3" width="6" height="18" rx="1"/>
+                    </svg>
+                    <span>Tablero Kanban</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="calendario">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span>Calendario</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="reportes">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    <span>Reportes</span>
+                </a>
+                <a href="contacto.html" class="sidebar__link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>Ayuda</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="dashboard-header__top">
+                    <div>
+                        <h1 class="dashboard-header__title">
+                            ¡Hola, <span data-user-name>Facilitador</span>! 👨‍🏫
+                        </h1>
+                        <p class="dashboard-header__subtitle">
+                            Gestiona el progreso de tus alumnos y crea nuevas microtareas
+                        </p>
+                    </div>
+
+                    <div class="dashboard-header__actions">
+                        <button class="btn btn--primary" id="create-task-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Nueva Microtarea
+                        </button>
+
+                        <div class="user-menu">
+                            <button class="user-menu__toggle" id="user-menu-toggle">
+                                <div class="user-menu__avatar" data-user-avatar>F</div>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                            </button>
+
+                            <div class="user-menu__dropdown" id="user-menu">
+                                <a href="#" class="user-menu__item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="8" r="5"/>
+                                        <path d="M20 21a8 8 0 10-16 0"/>
+                                    </svg>
+                                    <span>Mi Perfil</span>
+                                </a>
+                                <a href="#" class="user-menu__item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                                    </svg>
+                                    <span>Configuración</span>
+                                </a>
+                                <a href="#" class="user-menu__item user-menu__item--danger" id="logout-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                                        <polyline points="16 17 21 12 16 7"/>
+                                        <line x1="21" y1="12" x2="9" y2="12"/>
+                                    </svg>
+                                    <span>Cerrar Sesión</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB: INICIO -->
+            <div class="tab-content active" id="tab-inicio">
+                <!-- Métricas -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card__icon">👥</div>
+                        <div class="stat-card__label">Total Alumnos</div>
+                        <div class="stat-card__value">42</div>
+                        <div class="stat-card__change">+3 este mes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__icon">📝</div>
+                        <div class="stat-card__label">Tareas Activas</div>
+                        <div class="stat-card__value">15</div>
+                        <div class="stat-card__change">8 por revisar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__icon">✅</div>
+                        <div class="stat-card__label">Tasa de Completitud</div>
+                        <div class="stat-card__value">75%</div>
+                        <div class="stat-card__change">+5% vs mes anterior</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__icon">📊</div>
+                        <div class="stat-card__label">Evidencias Pendientes</div>
+                        <div class="stat-card__value">8</div>
+                        <div class="stat-card__change">Revisar hoy</div>
+                    </div>
+                </div>
+
+                <!-- US-053: Código de invitación -->
+                <section class="invite-section">
+                    <div class="invite-section__header">
+                        <div>
+                            <h3>Invita a tus alumnos</h3>
+                            <p style="color: var(--color-text-secondary); font-size: var(--font-size-small);">
+                                Comparte este código para que se registren y queden asociados a ti
+                            </p>
+                        </div>
+                        <button class="btn btn--outline" id="generate-new-code">
+                            Generar nuevo código
+                        </button>
+                    </div>
+                    <div class="invite-code-display">
+                        <span class="invite-code" id="invite-code">SUMAK-2024-ABC</span>
+                        <div class="invite-actions">
+                            <button class="btn btn--primary btn--small" id="copy-code-btn">
+                                📋 Copiar código
+                            </button>
+                            <button class="btn btn--outline btn--small" id="share-link-btn">
+                                🔗 Compartir enlace
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- US-052: Enviar mensajes -->
+                <section class="message-composer">
+                    <div class="message-composer__header">
+                        <h3>Enviar mensaje a alumnos</h3>
+                        <div class="message-type-selector">
+                            <button class="message-type-btn active" data-type="motivacional">
+                                💪 Motivacional
+                            </button>
+                            <button class="message-type-btn" data-type="informativo">
+                                ℹ️ Informativo
+                            </button>
+                            <button class="message-type-btn" data-type="recordatorio">
+                                ⏰ Recordatorio
+                            </button>
+                        </div>
+                    </div>
+                    <div class="message-composer__body">
+                        <textarea id="message-content" placeholder="Escribe tu mensaje aquí... Máximo 500 caracteres"></textarea>
+                    </div>
+                    <div class="message-composer__footer">
+                        <div class="recipient-selector">
+                            <label>Enviar a:</label>
+                            <select id="message-recipients">
+                                <option value="all">Todos los alumnos (42)</option>
+                                <option value="group-1">Grupo Finanzas (15)</option>
+                                <option value="group-2">Grupo Marketing (12)</option>
+                                <option value="rezagados">Alumnos rezagados (5)</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: var(--spacing-sm);">
+                            <button class="btn btn--outline" id="schedule-message">
+                                📅 Programar
+                            </button>
+                            <button class="btn btn--primary" id="send-message">
+                                📤 Enviar ahora
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Alumnos destacados -->
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Alumnos que necesitan atención</h2>
+                        <button class="btn btn--outline btn--small" data-tab="alumnos">Ver todos</button>
+                    </div>
+                    <div class="students-grid" id="students-grid">
+                        <!-- Los estudiantes se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: ALUMNOS -->
+            <div class="tab-content" id="tab-alumnos">
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Mis Alumnos</h2>
+                        <button class="btn btn--primary btn--small" id="add-student-btn">
+                            + Agregar alumno
+                        </button>
+                    </div>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">Todos (42)</button>
+                        <button class="filter-btn" data-filter="activo">Activos (35)</button>
+                        <button class="filter-btn" data-filter="rezagado">Rezagados (5)</button>
+                        <button class="filter-btn" data-filter="inactivo">Inactivos (2)</button>
+                    </div>
+                    <div class="students-grid" id="all-students-grid">
+                        <!-- Los estudiantes se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: GRUPOS (US-051) -->
+            <div class="tab-content" id="tab-grupos">
+                <section class="groups-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Grupos de Aprendizaje</h2>
+                        <button class="btn btn--primary" id="create-group-btn">
+                            + Crear nuevo grupo
+                        </button>
+                    </div>
+                    <div class="groups-grid" id="groups-grid">
+                        <!-- Los grupos se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: TAREAS (US-045, US-057) -->
+            <div class="tab-content" id="tab-tareas">
+                <section class="task-editor">
+                    <div class="section-header">
+                        <h2 class="section-title">Crear Microtarea</h2>
+                    </div>
+                    <div class="editor-toolbar">
+                        <button class="editor-tool" title="Agregar texto">📝</button>
+                        <button class="editor-tool" title="Agregar imagen">🖼️</button>
+                        <button class="editor-tool" title="Agregar pregunta">❓</button>
+                        <button class="editor-tool" title="Agregar video">🎬</button>
+                        <button class="editor-tool" title="Agregar checklist">☑️</button>
+                    </div>
+                    <div class="editor-canvas" id="editor-canvas">
+                        <div class="drag-block">
+                            <strong>Título de la tarea</strong>
+                            <p style="color: var(--color-text-tertiary); font-size: var(--font-size-small);">
+                                Haz clic para editar o arrastra bloques desde la barra de herramientas
+                            </p>
+                        </div>
+                    </div>
+                    <div style="margin-top: var(--spacing-md); display: flex; justify-content: flex-end; gap: var(--spacing-sm);">
+                        <button class="btn btn--outline">Guardar borrador</button>
+                        <button class="btn btn--primary" id="publish-task-btn">Publicar tarea</button>
+                    </div>
+                </section>
+
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Microtareas Creadas</h2>
+                    </div>
+                    <div id="microtasks-grid">
+                        <!-- Las microtareas se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: EVIDENCIAS (US-046, US-058) -->
+            <div class="tab-content" id="tab-evidencias">
+                <section class="gallery-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Galería de Evidencias</h2>
+                        <span class="badge badge--warning">8 pendientes de revisión</span>
+                    </div>
+                    
+                    <div class="gallery-tabs">
+                        <button class="gallery-tab active" data-filter="pending">⏳ Pendientes (8)</button>
+                        <button class="gallery-tab" data-filter="approved">✅ Aprobadas (45)</button>
+                        <button class="gallery-tab" data-filter="rejected">❌ Rechazadas (3)</button>
+                    </div>
+
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- Las evidencias se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: KANBAN (US-059) -->
+            <div class="tab-content" id="tab-kanban">
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">Tablero de Progreso</h2>
+                    </div>
+                    <div class="kanban-board" id="kanban-board">
+                        <div class="kanban-column" data-status="sin-iniciar">
+                            <div class="kanban-column__header">
+                                <span class="kanban-column__title">🔴 Sin Iniciar</span>
+                                <span class="kanban-column__count">5</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-sin-iniciar">
+                                <!-- Cards se cargan dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="kanban-column" data-status="en-progreso">
+                            <div class="kanban-column__header">
+                                <span class="kanban-column__title">🟡 En Progreso</span>
+                                <span class="kanban-column__count">12</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-en-progreso">
+                                <!-- Cards se cargan dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="kanban-column" data-status="en-revision">
+                            <div class="kanban-column__header">
+                                <span class="kanban-column__title">🔵 En Revisión</span>
+                                <span class="kanban-column__count">8</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-en-revision">
+                                <!-- Cards se cargan dinámicamente -->
+                            </div>
+                        </div>
+                        <div class="kanban-column" data-status="completado">
+                            <div class="kanban-column__header">
+                                <span class="kanban-column__title">🟢 Completado</span>
+                                <span class="kanban-column__count">17</span>
+                            </div>
+                            <div class="kanban-cards" id="kanban-completado">
+                                <!-- Cards se cargan dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: CALENDARIO (US-060) -->
+            <div class="tab-content" id="tab-calendario">
+                <section class="calendar-section">
+                    <div class="calendar-header">
+                        <h2 class="section-title">Calendario de Microtareas</h2>
+                        <div class="calendar-nav">
+                            <button class="calendar-nav-btn" id="prev-month">←</button>
+                            <span id="current-month" style="font-weight: var(--font-weight-semibold);">Enero 2024</span>
+                            <button class="calendar-nav-btn" id="next-month">→</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- El calendario se genera dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: REPORTES (US-047) -->
+            <div class="tab-content" id="tab-reportes">
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">Reportes de Efectividad</h2>
+                        <button class="btn btn--primary" id="generate-report-btn">
+                            📊 Generar Reporte
+                        </button>
+                    </div>
+                    
+                    <div class="stats-grid" style="margin-bottom: var(--spacing-xl);">
+                        <div class="stat-card">
+                            <div class="stat-card__icon">📈</div>
+                            <div class="stat-card__label">Participación</div>
+                            <div class="stat-card__value">85%</div>
+                            <div class="stat-card__change">+10% vs mes anterior</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__icon">✅</div>
+                            <div class="stat-card__label">Tareas Verificadas</div>
+                            <div class="stat-card__value">156</div>
+                            <div class="stat-card__change">Este mes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__icon">⭐</div>
+                            <div class="stat-card__label">Mejoras Reportadas</div>
+                            <div class="stat-card__value">23</div>
+                            <div class="stat-card__change">Negocios mejorados</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__icon">🎓</div>
+                            <div class="stat-card__label">Certificaciones</div>
+                            <div class="stat-card__value">8</div>
+                            <div class="stat-card__change">Alumnos certificados</div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-xl); background-color: var(--color-surface); border-radius: var(--border-radius-lg); text-align: center;">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom: var(--spacing-md); color: var(--color-primary);">
+                            <line x1="18" y1="20" x2="18" y2="10"/>
+                            <line x1="12" y1="20" x2="12" y2="4"/>
+                            <line x1="6" y1="20" x2="6" y2="14"/>
+                        </svg>
+                        <h3 style="margin-bottom: var(--spacing-sm);">Genera reportes detallados</h3>
+                        <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                            Obtén gráficos y tablas con la participación, tareas verificadas y mejoras reportadas de tus alumnos.
+                        </p>
+                        <div style="display: flex; gap: var(--spacing-sm); justify-content: center;">
+                            <button class="btn btn--outline">📄 Exportar PDF</button>
+                            <button class="btn btn--outline">📊 Exportar Excel</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- US-054: Botón de feedback -->
+    <button class="feedback-btn" id="feedback-btn">
+        💡 Enviar sugerencia
+    </button>
+
+    <!-- Modal: Crear Grupo (US-051) -->
+    <div class="modal" id="create-group-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h2 class="modal__title">Crear Nuevo Grupo</h2>
+                <button class="modal__close" onclick="closeModal('create-group-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <form id="create-group-form">
+                    <div class="form__group">
+                        <label class="form__label">Nombre del grupo *</label>
+                        <input type="text" class="form__input" placeholder="Ej: Grupo Finanzas Básicas" required>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Descripción</label>
+                        <textarea class="form__input" rows="3" placeholder="Describe el objetivo del grupo..."></textarea>
+                    </div>
+                    <div class="form__row">
+                        <div class="form__group">
+                            <label class="form__label">Fecha de inicio</label>
+                            <input type="date" class="form__input">
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label">Fecha de fin</label>
+                            <input type="date" class="form__input">
+                        </div>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Alumnos a asignar</label>
+                        <select class="form__select" multiple style="height: 120px;">
+                            <option>María López - Tienda de ropa</option>
+                            <option>Juan Pérez - Restaurante</option>
+                            <option>Ana García - Peluquería</option>
+                            <option>Carlos Ruiz - Taller mecánico</option>
+                            <option>Rosa Martínez - Pastelería</option>
+                        </select>
+                        <small style="color: var(--color-text-tertiary);">Mantén Ctrl para seleccionar varios</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" onclick="closeModal('create-group-modal')">Cancelar</button>
+                <button class="btn btn--primary" onclick="createGroup()">Crear Grupo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Feedback (US-054) -->
+    <div class="modal" id="feedback-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h2 class="modal__title">Enviar Sugerencia o Reporte</h2>
+                <button class="modal__close" onclick="closeModal('feedback-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <form id="feedback-form">
+                    <div class="form__group">
+                        <label class="form__label">Tipo de feedback *</label>
+                        <select class="form__select" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="sugerencia">💡 Sugerencia de mejora</option>
+                            <option value="contenido">📚 Contenido incorrecto</option>
+                            <option value="bug">🐛 Error técnico</option>
+                            <option value="ux">🎨 Mejora de interfaz</option>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Prioridad</label>
+                        <select class="form__select">
+                            <option value="baja">🟢 Baja</option>
+                            <option value="media" selected>🟡 Media</option>
+                            <option value="alta">🔴 Alta</option>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Descripción *</label>
+                        <textarea class="form__input" rows="5" placeholder="Describe tu sugerencia o el problema encontrado..." required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" onclick="closeModal('feedback-modal')">Cancelar</button>
+                <button class="btn btn--primary" onclick="sendFeedback()">Enviar Feedback</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Revisar Evidencia (US-046) -->
+    <div class="modal" id="review-evidence-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container" style="max-width: 800px;">
+            <div class="modal__header">
+                <h2 class="modal__title">Revisar Evidencia</h2>
+                <button class="modal__close" onclick="closeModal('review-evidence-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body" id="evidence-content">
+                <!-- Contenido dinámico -->
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" style="color: var(--color-error);" onclick="rejectEvidence()">
+                    ❌ Rechazar
+                </button>
+                <button class="btn btn--primary" onclick="approveEvidence()">
+                    ✅ Aprobar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/scripts/utils.js"></script>
+    <script src="assets/scripts/dashboard.js"></script>
+    <script>
+        // ========================================
+        // FUNCIONALIDADES SPRINT 2 - FACILITADOR
+        // ========================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTabs();
+            initSidebarNavigation();
+            loadStudents();
+            loadGroups();
+            loadGallery();
+            loadKanban();
+            loadCalendar();
+            initMessageTypeSelector();
+        });
+
+        // ========================================
+        // NAVEGACIÓN POR TABS
+        // ========================================
+
+        function initTabs() {
+            const tabLinks = document.querySelectorAll('[data-tab]');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.dataset.tab;
+                    switchTab(tabId);
+                });
+            });
+        }
+
+        function initSidebarNavigation() {
+            const sidebarLinks = document.querySelectorAll('.sidebar__link[data-tab]');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.dataset.tab;
+                    sidebarLinks.forEach(l => l.classList.remove('sidebar__link--active'));
+                    link.classList.add('sidebar__link--active');
+                    switchTab(tabId);
+                });
+            });
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+        }
+
+        // ========================================
+        // ESTUDIANTES
+        // ========================================
+
+        function loadStudents() {
+            const students = [
+                { id: 1, name: 'María López', business: 'Tienda de ropa "Mary"', status: 'activo', progress: 85, tasks: 12, badges: 4 },
+                { id: 2, name: 'Juan Pérez', business: 'Restaurante "El Sabor"', status: 'rezagado', progress: 45, tasks: 5, badges: 1 },
+                { id: 3, name: 'Ana García', business: 'Peluquería "Style"', status: 'activo', progress: 72, tasks: 10, badges: 3 },
+                { id: 4, name: 'Carlos Ruiz', business: 'Taller mecánico', status: 'inactivo', progress: 20, tasks: 2, badges: 0 },
+                { id: 5, name: 'Rosa Martínez', business: 'Pastelería "Dulce Rosa"', status: 'activo', progress: 90, tasks: 15, badges: 5 }
+            ];
+
+            renderStudents('students-grid', students.filter(s => s.status === 'rezagado' || s.status === 'inactivo').slice(0, 3));
+            renderStudents('all-students-grid', students);
+        }
+
+        function renderStudents(containerId, students) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            container.innerHTML = students.map(student => `
+                <div class="student-card">
+                    <div class="student-card__header">
+                        <div class="student-card__avatar">${getInitials(student.name)}</div>
+                        <div class="student-card__info">
+                            <div class="student-card__name">${student.name}</div>
+                            <span class="student-card__status student-card__status--${student.status}">
+                                ${student.status.charAt(0).toUpperCase() + student.status.slice(1)}
+                            </span>
+                            <div class="student-card__business">${student.business}</div>
+                        </div>
+                    </div>
+                    <div class="student-card__progress">
+                        <div class="student-card__progress-label">
+                            <span>Progreso</span>
+                            <span class="student-card__progress-text">${student.progress}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-bar__fill" style="width: ${student.progress}%"></div>
+                        </div>
+                    </div>
+                    <div class="student-card__stats">
+                        <div class="student-stat">
+                            <span class="student-stat__value">${student.tasks}</span>
+                            <span class="student-stat__label">Tareas</span>
+                        </div>
+                        <div class="student-stat">
+                            <span class="student-stat__value">${student.badges}</span>
+                            <span class="student-stat__label">Insignias</span>
+                        </div>
+                    </div>
+                    <div class="student-card__actions">
+                        <button class="btn btn--outline btn--small" onclick="viewStudent(${student.id})">Ver perfil</button>
+                        <button class="btn btn--primary btn--small" onclick="contactStudent(${student.id})">Contactar</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========================================
+        // US-051: GRUPOS
+        // ========================================
+
+        function loadGroups() {
+            const groups = [
+                { id: 1, name: 'Finanzas Básicas', members: 15, description: 'Conceptos fundamentales de finanzas para microempresas' },
+                { id: 2, name: 'Marketing Digital', members: 12, description: 'Estrategias de redes sociales y presencia online' },
+                { id: 3, name: 'Ventas Efectivas', members: 10, description: 'Técnicas de venta y atención al cliente' }
+            ];
+
+            const container = document.getElementById('groups-grid');
+            if (!container) return;
+
+            container.innerHTML = groups.map(group => `
+                <div class="group-card">
+                    <div class="group-card__header">
+                        <div class="group-card__icon">👥</div>
+                        <span class="group-card__members">${group.members} miembros</span>
+                    </div>
+                    <h3 class="group-card__name">${group.name}</h3>
+                    <p class="group-card__desc">${group.description}</p>
+                    <div class="group-card__actions">
+                        <button class="btn btn--outline btn--small" onclick="editGroup(${group.id})">Editar</button>
+                        <button class="btn btn--primary btn--small" onclick="viewGroup(${group.id})">Ver grupo</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('create-group-btn')?.addEventListener('click', () => {
+            openModal('create-group-modal');
+        });
+
+        function createGroup() {
+            showToast('¡Grupo creado exitosamente! 🎉', 'success');
+            closeModal('create-group-modal');
+        }
+
+        // ========================================
+        // US-058: GALERÍA DE EVIDENCIAS
+        // ========================================
+
+        function loadGallery() {
+            const evidences = [
+                { id: 1, student: 'María López', task: 'Registro de ventas', status: 'pending', date: '2024-01-15' },
+                { id: 2, student: 'Juan Pérez', task: 'Publicación en redes', status: 'pending', date: '2024-01-14' },
+                { id: 3, student: 'Ana García', task: 'Inventario', status: 'approved', date: '2024-01-13' },
+                { id: 4, student: 'Carlos Ruiz', task: 'Cálculo de costos', status: 'rejected', date: '2024-01-12' },
+                { id: 5, student: 'Rosa Martínez', task: 'Atención al cliente', status: 'pending', date: '2024-01-15' },
+                { id: 6, student: 'Luis Hernández', task: 'Marketing', status: 'approved', date: '2024-01-14' }
+            ];
+
+            renderGallery(evidences.filter(e => e.status === 'pending'));
+            initGalleryTabs(evidences);
+        }
+
+        function renderGallery(evidences) {
+            const container = document.getElementById('gallery-grid');
+            if (!container) return;
+
+            if (evidences.length === 0) {
+                container.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: var(--spacing-xl); color: var(--color-text-secondary);">
+                        <p>No hay evidencias en esta categoría</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = evidences.map(evidence => `
+                <div class="gallery-item" onclick="reviewEvidence(${evidence.id})">
+                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem;">
+                        📸
+                    </div>
+                    <span class="gallery-item__status gallery-item__status--${evidence.status}">
+                        ${evidence.status === 'pending' ? '⏳ Pendiente' : evidence.status === 'approved' ? '✅ Aprobada' : '❌ Rechazada'}
+                    </span>
+                    <div class="gallery-item__overlay">
+                        <strong>${evidence.student}</strong>
+                        <small>${evidence.task}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function initGalleryTabs(allEvidences) {
+            const tabs = document.querySelectorAll('.gallery-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const filter = tab.dataset.filter;
+                    const filtered = allEvidences.filter(e => e.status === filter);
+                    renderGallery(filtered);
+                });
+            });
+        }
+
+        function reviewEvidence(evidenceId) {
+            document.getElementById('evidence-content').innerHTML = `
+                <div style="margin-bottom: var(--spacing-lg);">
+                    <h3 style="margin-bottom: var(--spacing-sm);">Información del Alumno</h3>
+                    <p><strong>Nombre:</strong> María López</p>
+                    <p><strong>Tarea:</strong> Registro de ventas del día</p>
+                    <p><strong>Enviado:</strong> 15 de enero, 2024</p>
+                </div>
+                <div style="margin-bottom: var(--spacing-lg);">
+                    <h3 style="margin-bottom: var(--spacing-sm);">Evidencia</h3>
+                    <div style="padding: var(--spacing-xl); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: var(--border-radius-md); text-align: center; color: white;">
+                        <p>📸 Imagen de evidencia</p>
+                        <small>(Simulación)</small>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: var(--spacing-sm);">Comentarios</h3>
+                    <textarea class="form__input" rows="3" placeholder="Escribe tu retroalimentación..."></textarea>
+                </div>
+            `;
+            openModal('review-evidence-modal');
+        }
+
+        function approveEvidence() {
+            showToast('✅ Evidencia aprobada exitosamente', 'success');
+            closeModal('review-evidence-modal');
+        }
+
+        function rejectEvidence() {
+            showToast('❌ Evidencia rechazada. El alumno recibirá tu retroalimentación.', 'info');
+            closeModal('review-evidence-modal');
+        }
+
+        // ========================================
+        // US-059: KANBAN
+        // ========================================
+
+        function loadKanban() {
+            const students = {
+                'sin-iniciar': [
+                    { name: 'Carlos Ruiz', task: 'Registro de ventas' },
+                    { name: 'Pedro Sánchez', task: 'Marketing básico' }
+                ],
+                'en-progreso': [
+                    { name: 'María López', task: 'Cálculo de costos' },
+                    { name: 'Ana García', task: 'Inventario' },
+                    { name: 'Luis Hernández', task: 'Redes sociales' }
+                ],
+                'en-revision': [
+                    { name: 'Rosa Martínez', task: 'Registro diario' },
+                    { name: 'Juan Pérez', task: 'Atención al cliente' }
+                ],
+                'completado': [
+                    { name: 'María López', task: 'Publicación inicial' },
+                    { name: 'Ana García', task: 'Finanzas básicas' },
+                    { name: 'Rosa Martínez', task: 'Marketing' }
+                ]
+            };
+
+            Object.keys(students).forEach(status => {
+                const container = document.getElementById('kanban-' + status);
+                if (container) {
+                    container.innerHTML = students[status].map(student => `
+                        <div class="kanban-card">
+                            <div class="kanban-card__name">${student.name}</div>
+                            <div class="kanban-card__task">${student.task}</div>
+                        </div>
+                    `).join('');
+                }
+            });
+        }
+
+        // ========================================
+        // US-060: CALENDARIO
+        // ========================================
+
+        function loadCalendar() {
+            const container = document.getElementById('calendar-grid');
+            if (!container) return;
+
+            const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            const events = {
+                5: [{ title: 'Registro ventas', type: 'active' }],
+                10: [{ title: 'Marketing', type: 'active' }],
+                15: [{ title: 'Finanzas', type: 'pending' }],
+                20: [{ title: 'Inventario', type: 'active' }],
+                25: [{ title: 'Evaluación', type: 'pending' }]
+            };
+
+            let html = days.map(day => `<div class="calendar-day-header">${day}</div>`).join('');
+
+            // Días del mes anterior
+            for (let i = 0; i < 1; i++) {
+                html += `<div class="calendar-day calendar-day--other-month"><div class="calendar-day__number">30</div></div>`;
+            }
+
+            // Días del mes actual
+            for (let day = 1; day <= 31; day++) {
+                const dayEvents = events[day] || [];
+                html += `
+                    <div class="calendar-day">
+                        <div class="calendar-day__number">${day}</div>
+                        ${dayEvents.map(event => `
+                            <div class="calendar-event ${event.type === 'pending' ? 'calendar-event--pending' : ''}">
+                                ${event.title}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ========================================
+        // US-052: MENSAJES
+        // ========================================
+
+        function initMessageTypeSelector() {
+            const buttons = document.querySelectorAll('.message-type-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+
+            document.getElementById('send-message')?.addEventListener('click', () => {
+                const message = document.getElementById('message-content')?.value;
+                if (!message?.trim()) {
+                    showToast('Escribe un mensaje primero', 'error');
+                    return;
+                }
+                showToast('📤 Mensaje enviado a los alumnos seleccionados', 'success');
+                document.getElementById('message-content').value = '';
+            });
+        }
+
+        // ========================================
+        // US-053: CÓDIGOS DE INVITACIÓN
+        // ========================================
+
+        document.getElementById('copy-code-btn')?.addEventListener('click', () => {
+            const code = document.getElementById('invite-code')?.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                showToast('📋 Código copiado al portapapeles', 'success');
+            });
+        });
+
+        document.getElementById('share-link-btn')?.addEventListener('click', () => {
+            const link = 'https://sumak.pe/registro?code=SUMAK-2024-ABC';
+            navigator.clipboard.writeText(link).then(() => {
+                showToast('🔗 Enlace copiado al portapapeles', 'success');
+            });
+        });
+
+        document.getElementById('generate-new-code')?.addEventListener('click', () => {
+            const newCode = 'SUMAK-2024-' + Math.random().toString(36).substring(2, 5).toUpperCase();
+            document.getElementById('invite-code').textContent = newCode;
+            showToast('✨ Nuevo código generado', 'success');
+        });
+
+        // ========================================
+        // US-054: FEEDBACK
+        // ========================================
+
+        document.getElementById('feedback-btn')?.addEventListener('click', () => {
+            openModal('feedback-modal');
+        });
+
+        function sendFeedback() {
+            showToast('✅ Gracias por tu feedback. Ticket #' + Math.floor(Math.random() * 10000) + ' creado.', 'success');
+            closeModal('feedback-modal');
+        }
+
+        // ========================================
+        // UTILIDADES
+        // ========================================
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        }
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('modal--active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('modal--active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function viewStudent(id) {
+            showToast('Cargando perfil del alumno...', 'info');
+        }
+
+        function contactStudent(id) {
+            showToast('Abriendo chat con el alumno...', 'info');
+        }
+
+        function editGroup(id) {
+            showToast('Abriendo editor del grupo...', 'info');
+        }
+
+        function viewGroup(id) {
+            showToast('Cargando detalles del grupo...', 'info');
+        }
+
+        // Cerrar modales al hacer clic en overlay
+        document.querySelectorAll('.modal__overlay').forEach(overlay => {
+            overlay.addEventListener('click', () => {
+                overlay.closest('.modal').classList.remove('modal--active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // User menu
+        document.getElementById('user-menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('user-menu')?.classList.toggle('is-open');
+        });
+
+        document.getElementById('logout-btn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                logout();
+            }
+        });
+
+        // Crear tarea
+        document.getElementById('create-task-btn')?.addEventListener('click', () => {
+            switchTab('tareas');
+            document.querySelector('.sidebar__link[data-tab="tareas"]')?.classList.add('sidebar__link--active');
+        });
+    </script>
+</body>
+</html>
