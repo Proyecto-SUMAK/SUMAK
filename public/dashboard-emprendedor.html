@@ -974,5 +974,979 @@
                 grid-template-columns: 1fr;
             }
         }
+    
+
     </style>
 </head>
+<body>
+    <!-- 
+        DASHBOARD DEL EMPRENDEDOR - SPRINT 2
+        US-001: Recibir recordatorios de microtareas por WhatsApp
+        US-002: Ver historial de microtareas completadas
+        US-003: Compartir logros en redes sociales
+        US-004: Modo solo audio para microlecciones
+        US-007: Ver perfil público de mi negocio
+        US-014: Panel de progreso gamificado
+        US-015: Subir evidencia con preview
+        US-020: Recibir microtareas prácticas y accionables
+        US-022: Ver progreso y métricas simples
+        US-023: Contactar a mentor
+    -->
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar__header">
+                <img src="assets/images/SumakLogo_.png" alt="SUMAK" class="sidebar__logo">
+                <span class="sidebar__brand">SUMAK</span>
+            </div>
+
+            <nav class="sidebar__nav">
+                <a href="#" class="sidebar__link sidebar__link--active" data-tab="inicio">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                    </svg>
+                    <span>Inicio</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="tareas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 11l3 3L22 4"/>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                    </svg>
+                    <span>Mis Tareas</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="historial">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <span>Historial</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="logros">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    <span>Mis Logros</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="perfil">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="5"/>
+                        <path d="M20 21a8 8 0 10-16 0"/>
+                    </svg>
+                    <span>Mi Perfil Público</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="mentor">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                    </svg>
+                    <span>Mi Mentor</span>
+                </a>
+                <a href="recursos.html" class="sidebar__link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+                    </svg>
+                    <span>Recursos</span>
+                </a>
+                <a href="contacto.html" class="sidebar__link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>Ayuda</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <!-- Header del Dashboard -->
+            <header class="dashboard-header">
+                <div class="dashboard-header__top">
+                    <div>
+                        <h1 class="dashboard-header__title">
+                            ¡Hola, <span data-user-name>Usuario</span>! 👋
+                        </h1>
+                        <p class="dashboard-header__subtitle">
+                            Bienvenido a tu panel de <span data-business-name>Negocio</span>
+                        </p>
+                    </div>
+
+                    <div class="dashboard-header__actions">
+                        <!-- Notificaciones -->
+                        <div class="notifications">
+                            <button class="icon-button" id="notifications-bell" aria-label="Notificaciones">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                    <path d="M13.73 21a2 2 0 01-3.46 0"/>
+                                </svg>
+                                <span class="icon-button__badge" id="notification-count">3</span>
+                            </button>
+
+                            <div class="user-menu__dropdown" id="notifications-panel">
+                                <div id="notifications-list"></div>
+                            </div>
+                        </div>
+
+                        <!-- Menú de Usuario -->
+                        <div class="user-menu">
+                            <button class="user-menu__toggle" id="user-menu-toggle">
+                                <div class="user-menu__avatar" data-user-avatar>U</div>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                            </button>
+
+                            <div class="user-menu__dropdown" id="user-menu">
+                                <a href="#" class="user-menu__item" data-tab="perfil">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="8" r="5"/>
+                                        <path d="M20 21a8 8 0 10-16 0"/>
+                                    </svg>
+                                    <span>Mi Perfil</span>
+                                </a>
+                                <a href="#" class="user-menu__item" id="config-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="3"/>
+                                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                                    </svg>
+                                    <span>Configuración</span>
+                                </a>
+                                <a href="#" class="user-menu__item user-menu__item--danger" id="logout-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+                                        <polyline points="16 17 21 12 16 7"/>
+                                        <line x1="21" y1="12" x2="9" y2="12"/>
+                                    </svg>
+                                    <span>Cerrar Sesión</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB: INICIO -->
+            <div class="tab-content active" id="tab-inicio">
+                <!-- Métricas Rápidas -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Tareas Completadas</div>
+                        <div class="stat-card__value" id="tasks-completed">0</div>
+                        <div class="stat-card__change">+5 esta semana</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card__label">Racha Actual</div>
+                        <div class="stat-card__value" id="current-streak">0</div>
+                        <div class="stat-card__change">¡Sigue así!</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card__label">Insignias Ganadas</div>
+                        <div class="stat-card__value" id="total-badges">0</div>
+                        <div class="stat-card__change">3 más para nuevo nivel</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card__label">Actividad Semanal</div>
+                        <div class="stat-card__value" id="weekly-activity">0%</div>
+                        <div class="stat-card__change">Excelente progreso</div>
+                    </div>
+                </div>
+
+                <!-- Progreso General -->
+                <section class="progress-section">
+                    <div class="progress-section__header">
+                        <h2>Tu Progreso de Aprendizaje</h2>
+                        <span id="progress-text">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar__fill" id="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <p style="color: var(--color-text-secondary); font-size: var(--font-size-small); margin-top: var(--spacing-xs);">
+                        Has completado <strong id="completed-count">0</strong> de <strong id="total-count">0</strong> microtareas en tu ruta personalizada
+                    </p>
+                </section>
+
+                <!-- Tareas Pendientes -->
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Tus Microtareas</h2>
+                        <a href="#" class="btn btn--outline btn--small" data-tab="tareas">Ver todas</a>
+                    </div>
+
+                    <div class="tasks-grid" id="tasks-list">
+                        <!-- Las tareas se cargarán dinámicamente -->
+                    </div>
+                </section>
+
+                <!-- Contactar Mentor (US-023) -->
+                <section class="mentor-contact-card">
+                    <div class="mentor-contact__header">
+                        <div class="mentor-avatar">MG</div>
+                        <div class="mentor-info">
+                            <h4>María García</h4>
+                            <p>Tu mentora asignada • Especialista en finanzas</p>
+                        </div>
+                        <div class="mentor-status">
+                            <span class="mentor-status__dot mentor-status__dot--online"></span>
+                            <span>Disponible</span>
+                        </div>
+                    </div>
+                    <div class="mentor-message-form">
+                        <textarea class="mentor-message-input" id="mentor-message" placeholder="Escribe tu pregunta o consulta aquí..."></textarea>
+                        <div class="mentor-message-actions">
+                            <button class="attach-btn" id="attach-evidence-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                                </svg>
+                                Adjuntar evidencia
+                            </button>
+                            <button class="btn btn--primary" id="send-mentor-message">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                                Enviar mensaje
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: TAREAS -->
+            <div class="tab-content" id="tab-tareas">
+                <section class="tasks-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Todas tus Microtareas</h2>
+                    </div>
+                    <div class="tasks-grid" id="all-tasks-list">
+                        <!-- Las tareas se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: HISTORIAL (US-002) -->
+            <div class="tab-content" id="tab-historial">
+                <section class="history-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Historial de Tareas Completadas</h2>
+                    </div>
+                    
+                    <div class="history-filters">
+                        <button class="history-filter active" data-filter="all">Todas</button>
+                        <button class="history-filter" data-filter="finanzas">💰 Finanzas</button>
+                        <button class="history-filter" data-filter="marketing">📱 Marketing</button>
+                        <button class="history-filter" data-filter="ventas">🛍️ Ventas</button>
+                        <button class="history-filter" data-filter="operaciones">⚙️ Operaciones</button>
+                    </div>
+
+                    <div class="history-list" id="history-list">
+                        <!-- El historial se cargará dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: LOGROS (US-003) -->
+            <div class="tab-content" id="tab-logros">
+                <section class="badges-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Tus Insignias y Logros</h2>
+                        <span class="badge badge--primary">5 insignias ganadas</span>
+                    </div>
+
+                    <div class="badges-grid" id="badges-grid">
+                        <!-- Las insignias se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: PERFIL PÚBLICO (US-007) -->
+            <div class="tab-content" id="tab-perfil">
+                <section class="profile-preview-card">
+                    <div class="section-header">
+                        <h2 class="section-title">Vista Previa de tu Perfil Público</h2>
+                        <button class="btn btn--primary" id="edit-profile-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            Editar Perfil
+                        </button>
+                    </div>
+
+                    <div class="profile-preview__header">
+                        <div class="profile-preview__avatar" data-user-avatar>U</div>
+                        <div class="profile-preview__info">
+                            <h3 data-business-name>Mi Negocio</h3>
+                            <p style="color: var(--color-text-secondary);" data-business-category>Categoría del negocio</p>
+                            <div class="profile-preview__badges">
+                                <span class="profile-badge">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                        <polyline points="22 4 12 14.01 9 11.01" fill="none" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                    Certificado SUMAK
+                                </span>
+                                <span class="profile-badge" style="background-color: var(--color-secondary);">
+                                    ⭐ 4.8 valoración
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-preview__qr">
+                        <div class="qr-code" id="qr-code">
+                            <svg width="80" height="80" viewBox="0 0 100 100">
+                                <rect x="0" y="0" width="100" height="100" fill="white"/>
+                                <rect x="10" y="10" width="25" height="25" fill="black"/>
+                                <rect x="65" y="10" width="25" height="25" fill="black"/>
+                                <rect x="10" y="65" width="25" height="25" fill="black"/>
+                                <rect x="40" y="40" width="20" height="20" fill="black"/>
+                                <rect x="15" y="15" width="15" height="15" fill="white"/>
+                                <rect x="70" y="15" width="15" height="15" fill="white"/>
+                                <rect x="15" y="70" width="15" height="15" fill="white"/>
+                                <rect x="18" y="18" width="9" height="9" fill="black"/>
+                                <rect x="73" y="18" width="9" height="9" fill="black"/>
+                                <rect x="18" y="73" width="9" height="9" fill="black"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Comparte tu perfil</h4>
+                            <p style="font-size: var(--font-size-small); color: var(--color-text-secondary); margin-bottom: var(--spacing-sm);">
+                                Tus clientes pueden escanearlo para ver tu perfil
+                            </p>
+                            <div style="display: flex; gap: var(--spacing-xs);">
+                                <button class="btn btn--outline btn--small" id="download-qr-btn">
+                                    Descargar QR
+                                </button>
+                                <button class="btn btn--primary btn--small" id="share-profile-btn">
+                                    Compartir enlace
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: MENTOR -->
+            <div class="tab-content" id="tab-mentor">
+                <section class="mentor-contact-card" style="margin-bottom: 0;">
+                    <div class="mentor-contact__header">
+                        <div class="mentor-avatar">MG</div>
+                        <div class="mentor-info">
+                            <h4>María García</h4>
+                            <p>Tu mentora asignada • Especialista en finanzas</p>
+                        </div>
+                        <div class="mentor-status">
+                            <span class="mentor-status__dot mentor-status__dot--online"></span>
+                            <span>Disponible</span>
+                        </div>
+                    </div>
+                    
+                    <div style="padding: var(--spacing-md); background-color: var(--color-background); border-radius: var(--border-radius-md); margin-bottom: var(--spacing-md);">
+                        <p style="font-size: var(--font-size-small); color: var(--color-text-secondary);">
+                            <strong>Horarios de atención:</strong> Lunes a Viernes, 9:00 AM - 6:00 PM
+                        </p>
+                        <p style="font-size: var(--font-size-small); color: var(--color-text-secondary);">
+                            <strong>Tiempo estimado de respuesta:</strong> 2-4 horas
+                        </p>
+                    </div>
+
+                    <div class="mentor-message-form">
+                        <textarea class="mentor-message-input" id="mentor-message-full" placeholder="Escribe tu pregunta o consulta aquí... Incluye todos los detalles relevantes para que tu mentor pueda ayudarte mejor."></textarea>
+                        <div class="mentor-message-actions">
+                            <button class="attach-btn" id="attach-evidence-btn-full">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                                </svg>
+                                Adjuntar evidencia
+                            </button>
+                            <button class="btn btn--primary" id="send-mentor-message-full">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                                Enviar mensaje
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Compartir Logro (US-003) -->
+    <div class="modal" id="share-badge-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h2 class="modal__title">Compartir Insignia</h2>
+                <button class="modal__close" onclick="closeShareModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div style="text-align: center; margin-bottom: var(--spacing-lg);">
+                    <div id="share-badge-icon" style="font-size: 4rem; margin-bottom: var(--spacing-sm);"></div>
+                    <h3 id="share-badge-name"></h3>
+                    <p style="color: var(--color-text-secondary);" id="share-badge-desc"></p>
+                </div>
+                
+                <h4 style="margin-bottom: var(--spacing-md);">Comparte en:</h4>
+                <div class="share-options">
+                    <div class="share-option" onclick="shareToFacebook()">
+                        <span class="share-option__icon">📘</span>
+                        <span class="share-option__label">Facebook</span>
+                    </div>
+                    <div class="share-option" onclick="shareToInstagram()">
+                        <span class="share-option__icon">📸</span>
+                        <span class="share-option__label">Instagram</span>
+                    </div>
+                    <div class="share-option" onclick="shareToWhatsApp()">
+                        <span class="share-option__icon">💬</span>
+                        <span class="share-option__label">WhatsApp</span>
+                    </div>
+                    <div class="share-option" onclick="downloadBadgeImage()">
+                        <span class="share-option__icon">📥</span>
+                        <span class="share-option__label">Descargar imagen</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Subir Evidencia (US-015) -->
+    <div class="modal" id="upload-evidence-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h2 class="modal__title">Subir Evidencia</h2>
+                <button class="modal__close" onclick="closeUploadModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-area__icon">📁</div>
+                    <p><strong>Haz clic o arrastra</strong> tu archivo aquí</p>
+                    <p style="font-size: var(--font-size-small); color: var(--color-text-tertiary);">
+                        Formatos soportados: JPG, PNG, PDF, MP4 (máx. 10MB)
+                    </p>
+                    <input type="file" id="evidence-file-input" hidden accept="image/*,video/*,.pdf">
+                </div>
+
+                <div class="upload-preview" id="upload-preview">
+                    <img class="upload-preview__image" id="preview-image" src="" alt="Vista previa">
+                    <div class="upload-preview__actions">
+                        <button class="btn btn--outline btn--small" onclick="replaceFile()">
+                            Reemplazar
+                        </button>
+                        <button class="btn btn--primary btn--small" onclick="confirmUpload()">
+                            Confirmar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Ver Tarea con Audio (US-004) -->
+    <div class="modal" id="task-detail-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container" style="max-width: 700px;">
+            <div class="modal__header">
+                <h2 class="modal__title" id="task-detail-title">Detalle de Tarea</h2>
+                <button class="modal__close" onclick="closeTaskDetailModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <div id="task-detail-content"></div>
+                
+                <!-- Modo Audio (US-004) -->
+                <div class="audio-controls" id="audio-controls">
+                    <button class="audio-btn" id="audio-play-btn" onclick="toggleAudio()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                    </button>
+                    <div class="audio-progress">
+                        <div class="audio-progress__fill" id="audio-progress-fill"></div>
+                    </div>
+                    <span class="audio-time" id="audio-time">0:00 / 2:30</span>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" onclick="closeTaskDetailModal()">Cerrar</button>
+                <button class="btn btn--primary" onclick="openUploadModal()">Subir Evidencia</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/scripts/utils.js"></script>
+    <script src="assets/scripts/dashboard.js"></script>
+    <script>
+        // ========================================
+        // FUNCIONALIDADES SPRINT 2
+        // ========================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initTabs();
+            initSidebarNavigation();
+            loadBadges();
+            loadHistory();
+            initUploadArea();
+            initAudioPlayer();
+        });
+
+        // ========================================
+        // NAVEGACIÓN POR TABS
+        // ========================================
+
+        function initTabs() {
+            const tabLinks = document.querySelectorAll('[data-tab]');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.dataset.tab;
+                    switchTab(tabId);
+                });
+            });
+        }
+
+        function initSidebarNavigation() {
+            const sidebarLinks = document.querySelectorAll('.sidebar__link[data-tab]');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.dataset.tab;
+                    
+                    // Actualizar links activos
+                    sidebarLinks.forEach(l => l.classList.remove('sidebar__link--active'));
+                    link.classList.add('sidebar__link--active');
+                    
+                    switchTab(tabId);
+                });
+            });
+        }
+
+        function switchTab(tabId) {
+            // Ocultar todas las tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar la tab seleccionada
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+        }
+
+        // ========================================
+        // US-002: HISTORIAL DE TAREAS
+        // ========================================
+
+        function loadHistory() {
+            const historyList = document.getElementById('history-list');
+            if (!historyList) return;
+
+            const completedTasks = [
+                { id: 1, title: 'Registrar ventas del día', category: 'finanzas', completedAt: '2024-01-15', evidence: true },
+                { id: 2, title: 'Publicar en redes sociales', category: 'marketing', completedAt: '2024-01-14', evidence: true },
+                { id: 3, title: 'Calcular costos del producto', category: 'finanzas', completedAt: '2024-01-13', evidence: true },
+                { id: 4, title: 'Atender cliente nuevo', category: 'ventas', completedAt: '2024-01-12', evidence: false },
+                { id: 5, title: 'Organizar inventario', category: 'operaciones', completedAt: '2024-01-11', evidence: true }
+            ];
+
+            renderHistory(completedTasks);
+            initHistoryFilters(completedTasks);
+        }
+
+        function renderHistory(tasks) {
+            const historyList = document.getElementById('history-list');
+            
+            if (tasks.length === 0) {
+                historyList.innerHTML = `
+                    <div class="empty-state">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                        <h3>¡Aún no tienes tareas completadas!</h3>
+                        <p>Completa tu primera microtarea para empezar a construir tu historial</p>
+                        <button class="btn btn--primary" data-tab="tareas">Ver mis tareas</button>
+                    </div>
+                `;
+                return;
+            }
+
+            historyList.innerHTML = tasks.map(task => `
+                <div class="history-item" data-category="${task.category}">
+                    <div class="history-item__icon">✅</div>
+                    <div class="history-item__content">
+                        <div class="history-item__title">${task.title}</div>
+                        <div class="history-item__meta">
+                            ${getCategoryLabel(task.category)} • Completada el ${formatDate(task.completedAt)}
+                            ${task.evidence ? ' • 📎 Con evidencia' : ''}
+                        </div>
+                    </div>
+                    <div class="history-item__actions">
+                        <button class="btn btn--outline btn--small" onclick="viewHistoryDetail(${task.id})">
+                            Ver detalle
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function initHistoryFilters(allTasks) {
+            const filters = document.querySelectorAll('.history-filter');
+            filters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    filters.forEach(f => f.classList.remove('active'));
+                    filter.classList.add('active');
+                    
+                    const category = filter.dataset.filter;
+                    if (category === 'all') {
+                        renderHistory(allTasks);
+                    } else {
+                        const filtered = allTasks.filter(t => t.category === category);
+                        renderHistory(filtered);
+                    }
+                });
+            });
+        }
+
+        function viewHistoryDetail(taskId) {
+            showToast('Cargando detalle de la tarea...', 'info');
+        }
+
+        // ========================================
+        // US-003: INSIGNIAS Y COMPARTIR
+        // ========================================
+
+        function loadBadges() {
+            const badgesGrid = document.getElementById('badges-grid');
+            if (!badgesGrid) return;
+
+            const badges = [
+                { id: 1, name: 'Primera Venta', icon: '🏆', date: '2024-01-10', description: 'Completaste tu primera tarea de ventas' },
+                { id: 2, name: 'Constancia', icon: '🔥', date: '2024-01-12', description: 'Completaste 7 días seguidos' },
+                { id: 3, name: 'Finanzas Pro', icon: '💰', date: '2024-01-14', description: 'Completaste 5 tareas de finanzas' },
+                { id: 4, name: 'Social Media', icon: '📱', date: '2024-01-15', description: 'Publicaste tu primer contenido' },
+                { id: 5, name: 'Organizado', icon: '📦', date: '2024-01-16', description: 'Organizaste tu inventario' }
+            ];
+
+            badgesGrid.innerHTML = badges.map(badge => `
+                <div class="badge-card" data-badge-id="${badge.id}">
+                    <div class="badge-card__icon">${badge.icon}</div>
+                    <div class="badge-card__name">${badge.name}</div>
+                    <div class="badge-card__date">Obtenida: ${formatDate(badge.date)}</div>
+                    <button class="badge-card__share" onclick="openShareModal(${badge.id}, '${badge.icon}', '${badge.name}', '${badge.description}')">
+                        Compartir 🔗
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openShareModal(badgeId, icon, name, description) {
+            document.getElementById('share-badge-icon').textContent = icon;
+            document.getElementById('share-badge-name').textContent = name;
+            document.getElementById('share-badge-desc').textContent = description;
+            
+            const modal = document.getElementById('share-badge-modal');
+            modal.classList.add('modal--active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeShareModal() {
+            const modal = document.getElementById('share-badge-modal');
+            modal.classList.remove('modal--active');
+            document.body.style.overflow = '';
+        }
+
+        function shareToFacebook() {
+            showToast('Abriendo Facebook para compartir...', 'info');
+            closeShareModal();
+        }
+
+        function shareToInstagram() {
+            showToast('Abriendo Instagram para compartir...', 'info');
+            closeShareModal();
+        }
+
+        function shareToWhatsApp() {
+            const text = encodeURIComponent('¡Gané una nueva insignia en SUMAK! 🏆');
+            window.open('https://wa.me/?text=' + text, '_blank');
+            closeShareModal();
+        }
+
+        function downloadBadgeImage() {
+            showToast('Descargando imagen de la insignia...', 'success');
+            closeShareModal();
+        }
+
+        // ========================================
+        // US-004: MODO AUDIO
+        // ========================================
+
+        let audioPlaying = false;
+        let audioInterval = null;
+        let audioProgress = 0;
+
+        function initAudioPlayer() {
+            // Configuración inicial del reproductor
+        }
+
+        function toggleAudio() {
+            const playBtn = document.getElementById('audio-play-btn');
+            const progressFill = document.getElementById('audio-progress-fill');
+            const timeDisplay = document.getElementById('audio-time');
+
+            if (audioPlaying) {
+                // Pausar
+                audioPlaying = false;
+                clearInterval(audioInterval);
+                playBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+            } else {
+                // Reproducir
+                audioPlaying = true;
+                playBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+                
+                audioInterval = setInterval(() => {
+                    audioProgress += 1;
+                    if (audioProgress >= 150) {
+                        audioProgress = 0;
+                        audioPlaying = false;
+                        clearInterval(audioInterval);
+                        playBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>`;
+                    }
+                    
+                    const percent = (audioProgress / 150) * 100;
+                    progressFill.style.width = percent + '%';
+                    
+                    const currentSeconds = Math.floor(audioProgress);
+                    const currentMinutes = Math.floor(currentSeconds / 60);
+                    const remainingSeconds = currentSeconds % 60;
+                    timeDisplay.textContent = `${currentMinutes}:${remainingSeconds.toString().padStart(2, '0')} / 2:30`;
+                }, 1000);
+            }
+        }
+
+        // ========================================
+        // US-015: SUBIR EVIDENCIA CON PREVIEW
+        // ========================================
+
+        function initUploadArea() {
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('evidence-file-input');
+            
+            if (!uploadArea || !fileInput) return;
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFileSelect(files[0]);
+                }
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFileSelect(e.target.files[0]);
+                }
+            });
+        }
+
+        function handleFileSelect(file) {
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4', 'application/pdf'];
+            
+            if (file.size > maxSize) {
+                showToast('El archivo es muy grande. Máximo 10MB.', 'error');
+                return;
+            }
+            
+            if (!allowedTypes.includes(file.type)) {
+                showToast('Formato no soportado. Usa JPG, PNG, PDF o MP4.', 'error');
+                return;
+            }
+            
+            // Mostrar preview
+            const preview = document.getElementById('upload-preview');
+            const previewImage = document.getElementById('preview-image');
+            
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    preview.classList.add('has-file');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = '';
+                preview.classList.add('has-file');
+                previewImage.alt = file.name;
+            }
+        }
+
+        function openUploadModal() {
+            const modal = document.getElementById('upload-evidence-modal');
+            modal.classList.add('modal--active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeUploadModal() {
+            const modal = document.getElementById('upload-evidence-modal');
+            modal.classList.remove('modal--active');
+            document.body.style.overflow = '';
+            
+            // Reset preview
+            document.getElementById('upload-preview').classList.remove('has-file');
+            document.getElementById('evidence-file-input').value = '';
+        }
+
+        function replaceFile() {
+            document.getElementById('evidence-file-input').click();
+        }
+
+        function confirmUpload() {
+            showToast('¡Evidencia subida exitosamente! 📎', 'success');
+            closeUploadModal();
+        }
+
+        // ========================================
+        // US-023: CONTACTAR MENTOR
+        // ========================================
+
+        document.getElementById('send-mentor-message')?.addEventListener('click', sendMentorMessage);
+        document.getElementById('send-mentor-message-full')?.addEventListener('click', sendMentorMessage);
+
+        function sendMentorMessage() {
+            const messageInput = document.getElementById('mentor-message') || document.getElementById('mentor-message-full');
+            const message = messageInput?.value.trim();
+            
+            if (!message) {
+                showToast('Escribe un mensaje para tu mentor', 'error');
+                return;
+            }
+            
+            showToast('Mensaje enviado a tu mentora. Respuesta estimada: 2-4 horas.', 'success');
+            messageInput.value = '';
+        }
+
+        document.getElementById('attach-evidence-btn')?.addEventListener('click', openUploadModal);
+        document.getElementById('attach-evidence-btn-full')?.addEventListener('click', openUploadModal);
+
+        // ========================================
+        // US-007: PERFIL PÚBLICO
+        // ========================================
+
+        document.getElementById('edit-profile-btn')?.addEventListener('click', () => {
+            showToast('Abriendo editor de perfil...', 'info');
+        });
+
+        document.getElementById('download-qr-btn')?.addEventListener('click', () => {
+            showToast('Descargando código QR...', 'success');
+        });
+
+        document.getElementById('share-profile-btn')?.addEventListener('click', () => {
+            const profileUrl = 'https://sumak.pe/perfil/mi-negocio';
+            navigator.clipboard.writeText(profileUrl).then(() => {
+                showToast('¡Enlace copiado al portapapeles! 📋', 'success');
+            }).catch(() => {
+                showToast('Compartiendo perfil...', 'info');
+            });
+        });
+
+        // ========================================
+        // VER DETALLES DE TAREA
+        // ========================================
+
+        window.viewTaskDetails = function(taskId) {
+            const modal = document.getElementById('task-detail-modal');
+            document.getElementById('task-detail-title').textContent = 'Registrar ventas del día';
+            document.getElementById('task-detail-content').innerHTML = `
+                <p style="margin-bottom: var(--spacing-md);">
+                    <strong>Objetivo:</strong> Aprende a llevar un registro diario de todas tus ventas para tener mejor control de tu negocio.
+                </p>
+                <p style="margin-bottom: var(--spacing-md);">
+                    <strong>Pasos a seguir:</strong>
+                </p>
+                <ol style="margin-left: var(--spacing-md); margin-bottom: var(--spacing-md);">
+                    <li>Anota cada venta que realices durante el día</li>
+                    <li>Incluye: producto, cantidad, precio y método de pago</li>
+                    <li>Al final del día, suma el total de ventas</li>
+                    <li>Toma una foto de tu registro y súbela como evidencia</li>
+                </ol>
+                <p style="color: var(--color-text-secondary); font-size: var(--font-size-small);">
+                    💡 <strong>Tip:</strong> Puedes usar una libreta o la plantilla que te proporcionamos
+                </p>
+            `;
+            
+            modal.classList.add('modal--active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        function closeTaskDetailModal() {
+            const modal = document.getElementById('task-detail-modal');
+            modal.classList.remove('modal--active');
+            document.body.style.overflow = '';
+        }
+
+        // ========================================
+        // UTILIDADES
+        // ========================================
+
+        function getCategoryLabel(category) {
+            const labels = {
+                'finanzas': '💰 Finanzas',
+                'marketing': '📱 Marketing',
+                'ventas': '🛍️ Ventas',
+                'operaciones': '⚙️ Operaciones'
+            };
+            return labels[category] || category;
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('es-PE', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        // Cerrar modales al hacer clic en overlay
+        document.querySelectorAll('.modal__overlay').forEach(overlay => {
+            overlay.addEventListener('click', () => {
+                overlay.closest('.modal').classList.remove('modal--active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>
