@@ -974,8 +974,6 @@
                 grid-template-columns: 1fr;
             }
         }
-    
-
     </style>
 </head>
 <body>
@@ -1509,6 +1507,7 @@
             loadHistory();
             initUploadArea();
             initAudioPlayer();
+            loadTasks();
         });
 
         // ========================================
@@ -1947,6 +1946,195 @@
                 document.body.style.overflow = '';
             });
         });
+
+        // ========================================
+        // CARGAR TAREAS PENDIENTES
+        // ========================================
+
+        function loadTasks() {
+            const tasksList = document.getElementById('tasks-list');
+            if (!tasksList) return;
+
+            const tasks = [
+                { id: 1, title: 'Registrar ventas del día', category: 'finanzas', priority: 'alta', duration: '10 min', status: 'pendiente' },
+                { id: 2, title: 'Publicar foto de producto en redes', category: 'marketing', priority: 'media', duration: '15 min', status: 'pendiente' },
+                { id: 3, title: 'Calcular costos del producto estrella', category: 'finanzas', priority: 'alta', duration: '20 min', status: 'en-progreso' },
+                { id: 4, title: 'Organizar inventario semanal', category: 'operaciones', priority: 'baja', duration: '30 min', status: 'pendiente' },
+                { id: 5, title: 'Responder mensajes de clientes', category: 'ventas', priority: 'alta', duration: '10 min', status: 'pendiente' }
+            ];
+
+            tasksList.innerHTML = tasks.map(task => `
+                <div class="task-card" data-status="${task.status}">
+                    <div class="task-card__header">
+                        <span class="task-card__category">${getCategoryLabel(task.category)}</span>
+                        <span class="task-card__priority task-card__priority--${task.priority}">${task.priority}</span>
+                    </div>
+                    <h3 class="task-card__title">${task.title}</h3>
+                    <div class="task-card__meta">
+                        <span>⏱️ ${task.duration}</span>
+                        <span class="task-card__status task-card__status--${task.status}">
+                            ${task.status === 'en-progreso' ? '🔄 En progreso' : '⏳ Pendiente'}
+                        </span>
+                    </div>
+                    <div class="task-card__actions">
+                        <button class="btn btn--outline btn--small" onclick="viewTaskDetails(${task.id})">Ver detalle</button>
+                        <button class="btn btn--primary btn--small" onclick="startTask(${task.id})">
+                            ${task.status === 'en-progreso' ? 'Continuar' : 'Iniciar'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Actualizar métricas
+            document.getElementById('tasks-completed').textContent = '12';
+            document.getElementById('current-streak').textContent = '5 días';
+            document.getElementById('total-badges').textContent = '5';
+            document.getElementById('weekly-activity').textContent = '85%';
+            document.getElementById('progress-text').textContent = '65%';
+            document.getElementById('progress-bar').style.width = '65%';
+            document.getElementById('completed-count').textContent = '12';
+            document.getElementById('total-count').textContent = '18';
+        }
+
+        function startTask(taskId) {
+            showToast('¡Iniciando tarea! Buena suerte 💪', 'success');
+        }
+
+        // ========================================
+        // MENÚ DE USUARIO Y LOGOUT
+        // ========================================
+
+        document.getElementById('user-menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('user-menu')?.classList.toggle('is-open');
+        });
+
+        document.getElementById('logout-btn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+                // Limpiar datos de sesión
+                localStorage.removeItem('sumak_user');
+                sessionStorage.clear();
+                // Redirigir al login
+                showToast('Cerrando sesión...', 'info');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            const userMenu = document.getElementById('user-menu');
+            const toggleBtn = document.getElementById('user-menu-toggle');
+            if (userMenu && toggleBtn && !userMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+                userMenu.classList.remove('is-open');
+            }
+        });
+
+        // Función showToast si no existe
+        if (typeof showToast !== 'function') {
+            window.showToast = function(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = 'toast toast--' + type;
+                toast.innerHTML = message;
+                toast.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    padding: 1rem 1.5rem;
+                    background-color: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
+                    color: white;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    animation: slideIn 0.3s ease;
+                `;
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    toast.style.animation = 'slideOut 0.3s ease';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            };
+        }
+
+        // Agregar estilos de animación
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            .user-menu__dropdown.is-open {
+                display: block;
+            }
+            .task-card {
+                padding: var(--spacing-md);
+                background-color: var(--color-surface);
+                border: 2px solid var(--color-border);
+                border-radius: var(--border-radius-lg);
+                transition: all var(--transition-normal);
+            }
+            .task-card:hover {
+                border-color: var(--color-primary);
+                box-shadow: var(--shadow-md);
+            }
+            .task-card__header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: var(--spacing-sm);
+            }
+            .task-card__category {
+                font-size: var(--font-size-small);
+                color: var(--color-text-secondary);
+            }
+            .task-card__priority {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+                font-weight: var(--font-weight-semibold);
+                border-radius: var(--border-radius-full);
+                text-transform: uppercase;
+            }
+            .task-card__priority--alta {
+                background-color: #FFEBEE;
+                color: #C62828;
+            }
+            .task-card__priority--media {
+                background-color: #FFF3E0;
+                color: #EF6C00;
+            }
+            .task-card__priority--baja {
+                background-color: #E8F5E9;
+                color: #2E7D32;
+            }
+            .task-card__title {
+                font-size: 1rem;
+                font-weight: var(--font-weight-semibold);
+                margin-bottom: var(--spacing-sm);
+            }
+            .task-card__meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: var(--font-size-small);
+                color: var(--color-text-tertiary);
+                margin-bottom: var(--spacing-md);
+            }
+            .task-card__actions {
+                display: flex;
+                gap: var(--spacing-xs);
+            }
+            .tasks-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: var(--spacing-md);
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
