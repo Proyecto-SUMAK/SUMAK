@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/styles/style.css">
     <link rel="stylesheet" href="assets/styles/responsive.css">
     <style>
-        /* Estilos mejorados del dashboard cliente */
+        /* Estilos del dashboard cliente */
         .dashboard {
             display: grid;
             grid-template-columns: 250px 1fr;
@@ -174,6 +174,7 @@
             color: var(--color-error);
         }
 
+        /* Búsqueda */
         .search-section {
             margin-bottom: var(--spacing-xl);
         }
@@ -223,6 +224,7 @@
             border-color: var(--color-secondary);
         }
 
+        /* Tarjetas de negocio */
         .businesses-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -280,6 +282,7 @@
             align-items: center;
             justify-content: center;
             background-color: white;
+            border: none;
             border-radius: var(--border-radius-full);
             cursor: pointer;
             transition: all var(--transition-fast);
@@ -343,27 +346,429 @@
             gap: var(--spacing-xs);
         }
 
-        .featured-section {
-            margin-bottom: var(--spacing-xl);
-            padding: var(--spacing-xl);
-            background: linear-gradient(135deg, var(--color-primary-lightest) 0%, var(--color-secondary-lightest) 100%);
+        /* ========================================
+           ESTILOS NUEVOS SPRINT 2
+           ======================================== */
+
+        /* US-029/US-030: Perfil detallado del negocio */
+        .business-detail {
+            display: none;
+        }
+
+        .business-detail.active {
+            display: block;
+        }
+
+        .business-detail__header {
+            position: relative;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: flex-end;
+            padding: var(--spacing-lg);
+        }
+
+        .business-detail__info {
+            color: white;
+        }
+
+        .business-detail__name {
+            font-size: 2rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .business-detail__badges {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: var(--font-size-small);
+            font-weight: var(--font-weight-semibold);
+            border-radius: var(--border-radius-full);
+            backdrop-filter: blur(4px);
+        }
+
+        .business-detail__content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .business-detail__main {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .business-detail__sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .detail-section {
+            padding: var(--spacing-lg);
+            background-color: var(--color-surface);
             border-radius: var(--border-radius-lg);
         }
 
-        .featured-section__title {
-            font-size: 1.5rem;
-            margin-bottom: var(--spacing-sm);
+        .detail-section__title {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .featured-section__description {
+        /* US-038: Historia del emprendedor */
+        .entrepreneur-story {
+            padding: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--color-primary-lightest) 0%, var(--color-surface) 100%);
+            border-radius: var(--border-radius-lg);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .entrepreneur-story__quote {
+            font-style: italic;
             color: var(--color-text-secondary);
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
         }
 
-        .featured-businesses {
+        .entrepreneur-story__author {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .entrepreneur-story__avatar {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: var(--font-weight-bold);
+            border-radius: var(--border-radius-full);
+        }
+
+        /* US-041: Catálogo visual */
+        .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: var(--spacing-md);
+        }
+
+        .catalog-item {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .catalog-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .catalog-item__image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .catalog-item__content {
+            padding: var(--spacing-sm);
+        }
+
+        .catalog-item__name {
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-small);
+            margin-bottom: 0.25rem;
+        }
+
+        .catalog-item__price {
+            color: var(--color-primary);
+            font-weight: var(--font-weight-bold);
+        }
+
+        /* US-032: Compartir perfil */
+        .share-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-small);
+            transition: all var(--transition-fast);
+        }
+
+        .share-btn:hover {
+            background-color: var(--color-primary-lightest);
+            border-color: var(--color-primary);
+        }
+
+        /* US-043: Reservar cita */
+        .booking-section {
+            padding: var(--spacing-lg);
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .booking-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .booking-day-header {
+            text-align: center;
+            font-size: var(--font-size-small);
+            font-weight: var(--font-weight-semibold);
+            padding: var(--spacing-xs);
+        }
+
+        .booking-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-background);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: var(--font-size-small);
+            transition: all var(--transition-fast);
+        }
+
+        .booking-day:hover {
+            background-color: var(--color-primary-lightest);
+        }
+
+        .booking-day.selected {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .booking-day.unavailable {
+            background-color: var(--color-background);
+            color: var(--color-text-tertiary);
+            cursor: not-allowed;
+        }
+
+        .booking-times {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .booking-time {
+            padding: 0.5rem 1rem;
+            background-color: var(--color-background);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-small);
+            transition: all var(--transition-fast);
+        }
+
+        .booking-time:hover {
+            border-color: var(--color-primary);
+        }
+
+        .booking-time.selected {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* US-031: Favoritos */
+        .favorites-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .favorites-empty {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+        }
+
+        /* US-033: Soporte */
+        .help-section {
+            padding: var(--spacing-lg);
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .faq-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+        }
+
+        .faq-item__question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md);
+            background-color: var(--color-background);
+            cursor: pointer;
+            font-weight: var(--font-weight-medium);
+        }
+
+        .faq-item__answer {
+            display: none;
+            padding: var(--spacing-md);
+            color: var(--color-text-secondary);
+        }
+
+        .faq-item.open .faq-item__answer {
+            display: block;
+        }
+
+        /* US-035: Perfil del usuario */
+        .user-profile-section {
+            padding: var(--spacing-lg);
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .form__group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .form__label {
+            font-weight: var(--font-weight-medium);
+        }
+
+        .form__input {
+            padding: var(--spacing-sm);
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            font-family: inherit;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form__input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        /* Tabs */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: var(--z-index-modal);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.modal--active {
+            display: flex;
+        }
+
+        .modal__overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal__container {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .modal__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal__title {
+            font-size: 1.25rem;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .modal__close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-tertiary);
+        }
+
+        .modal__body {
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+            max-height: calc(90vh - 140px);
+        }
+
+        .modal__footer {
+            padding: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-sm);
         }
 
         @media (max-width: 767px) {
@@ -392,15 +797,28 @@
             .businesses-grid {
                 grid-template-columns: 1fr;
             }
+
+            .business-detail__content {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 
-        DASHBOARD DEL CLIENTE
+        DASHBOARD DEL CLIENTE - SPRINT 2
         US-029: Ver información detallada del negocio
-        US-041: Ver catálogo visual del negocio
+        US-030: Ver la confiabilidad del negocio
         US-031: Guardar emprendedores favoritos
+        US-032: Recomendar un emprendedor a un amigo
+        US-033: Soporte técnico integrado
+        US-034: Notificaciones relevantes
+        US-035: Perfil del usuario
+        US-038: Conocer la historia del emprendedor
+        US-041: Ver catálogo visual del negocio
+        US-042: Comparar negocios en tarjetas
+        US-043: Reservar cita en calendario visual
+        US-044: Filtrar negocios con menú visual
     -->
     <div class="dashboard">
         <!-- Sidebar -->
@@ -411,39 +829,48 @@
             </div>
 
             <nav class="sidebar__nav">
-                <a href="#" class="sidebar__link sidebar__link--active">
+                <a href="#" class="sidebar__link sidebar__link--active" data-tab="explorar">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="M21 21l-4.35-4.35"/>
                     </svg>
                     <span>Explorar</span>
                 </a>
-                <a href="#" class="sidebar__link">
+                <a href="#" class="sidebar__link" data-tab="favoritos">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
                     </svg>
                     <span>Mis Favoritos</span>
                 </a>
-                <a href="#" class="sidebar__link">
+                <a href="#" class="sidebar__link" data-tab="reservas">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M9 11l3 3L22 4"/>
-                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <span>Mis Reservas</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="resenas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>
                     <span>Mis Reseñas</span>
                 </a>
-                <a href="#" class="sidebar__link">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                    </svg>
-                    <span>Mensajes</span>
-                </a>
-                <a href="contacto.html" class="sidebar__link">
+                <a href="#" class="sidebar__link" data-tab="ayuda">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
                         <line x1="12" y1="17" x2="12.01" y2="17"/>
                     </svg>
                     <span>Ayuda</span>
+                </a>
+                <a href="#" class="sidebar__link" data-tab="perfil">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="5"/>
+                        <path d="M20 21a8 8 0 10-16 0"/>
+                    </svg>
+                    <span>Mi Perfil</span>
                 </a>
             </nav>
         </aside>
@@ -454,10 +881,10 @@
             <header class="dashboard-header">
                 <div class="dashboard-header__top">
                     <div>
-                        <h1 class="dashboard-header__title">
+                        <h1 class="dashboard-header__title" id="page-title">
                             Descubre Negocios Locales 🛍️
                         </h1>
-                        <p class="dashboard-header__subtitle">
+                        <p class="dashboard-header__subtitle" id="page-subtitle">
                             Apoya a microemprendedores certificados en tu zona
                         </p>
                     </div>
@@ -472,20 +899,20 @@
                             </button>
 
                             <div class="user-menu__dropdown" id="user-menu">
-                                <a href="#" class="user-menu__item">
+                                <a href="#" class="user-menu__item" data-tab="perfil">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="3"/>
-                                        <path d="M12 1v6m0 6v6"/>
+                                        <circle cx="12" cy="8" r="5"/>
+                                        <path d="M20 21a8 8 0 10-16 0"/>
                                     </svg>
                                     <span>Mi Perfil</span>
                                 </a>
-                                <a href="#" class="user-menu__item">
+                                <a href="#" class="user-menu__item" data-tab="favoritos">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
                                     </svg>
                                     <span>Mis Favoritos</span>
                                 </a>
-                                <a href="#" class="user-menu__item">
+                                <a href="#" class="user-menu__item" id="config-btn">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <circle cx="12" cy="12" r="3"/>
                                         <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
@@ -506,284 +933,557 @@
                 </div>
             </header>
 
-            <!-- Barra de búsqueda y filtros -->
-            <section class="search-section">
-                <div class="search-bar">
-                    <input 
-                        type="text" 
-                        class="search-bar__input" 
-                        placeholder="Buscar negocios, productos o servicios..."
-                        id="search-input"
-                    >
-                    <button class="btn btn--primary" onclick="searchBusinesses()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="M21 21l-4.35-4.35"/>
-                        </svg>
-                        Buscar
-                    </button>
-                </div>
+            <!-- TAB: EXPLORAR -->
+            <div class="tab-content active" id="tab-explorar">
+                <!-- Búsqueda (US-044) -->
+                <section class="search-section">
+                    <div class="search-bar">
+                        <input type="text" class="search-bar__input" id="search-input" placeholder="Buscar negocios, productos o servicios...">
+                        <button class="btn btn--primary" onclick="searchBusinesses()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                            Buscar
+                        </button>
+                    </div>
 
-                <div class="search-filters">
-                    <button class="filter-chip active" data-category="all">Todos</button>
-                    <button class="filter-chip" data-category="comida">🍽️ Comida</button>
-                    <button class="filter-chip" data-category="ropa">👕 Ropa</button>
-                    <button class="filter-chip" data-category="belleza">💄 Belleza</button>
-                    <button class="filter-chip" data-category="tecnologia">💻 Tecnología</button>
-                    <button class="filter-chip" data-category="artesania">🎨 Artesanía</button>
-                    <button class="filter-chip" data-category="servicios">🔧 Servicios</button>
-                </div>
-            </section>
+                    <div class="search-filters">
+                        <button class="filter-chip active" data-category="all">🏪 Todos</button>
+                        <button class="filter-chip" data-category="comida">🍽️ Comida</button>
+                        <button class="filter-chip" data-category="ropa">👕 Ropa</button>
+                        <button class="filter-chip" data-category="belleza">💄 Belleza</button>
+                        <button class="filter-chip" data-category="tecnologia">💻 Tecnología</button>
+                        <button class="filter-chip" data-category="artesania">🎨 Artesanía</button>
+                        <button class="filter-chip" data-category="servicios">🔧 Servicios</button>
+                    </div>
+                </section>
 
-            <!-- Sección destacada -->
-          <section class="featured-section">
-    <h2 class="featured-section__title">⭐ Negocios Destacados del Mes</h2>
-    <p class="featured-section__description">
-        Estos emprendedores han completado exitosamente su capacitación SUMAK
-    </p>
-    <div class="featured-businesses">
-        <div class="business-card">
-            <div class="business-card__image" style="background-image: url('assets/images/Reposteria.png'); background-size: cover; background-position: center;"></div>
-            <div class="business-card__content">
-                <h3 class="business-card__name">Repostería Dulce María</h3>
-                <div class="business-card__rating">
-                    <span class="business-card__stars">⭐⭐⭐⭐⭐</span>
-                    <span>5.0 (48 reseñas)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="business-card">
-            <div class="business-card__image" style="background-image: url('assets/images/boutique.png'); background-size: cover; background-position: center;"></div>
-            <div class="business-card__content">
-                <h3 class="business-card__name">Boutique Lucy</h3>
-                <div class="business-card__rating">
-                    <span class="business-card__stars">⭐⭐⭐⭐⭐</span>
-                    <span>4.9 (35 reseñas)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="business-card">
-            <div class="business-card__image" style="background-image: url('assets/images/ferreteria.png'); background-size: cover; background-position: center;"></div>
-            <div class="business-card__content">
-                <h3 class="business-card__name">Servicios R&S</h3>
-                <div class="business-card__rating">
-                    <span class="business-card__stars">⭐⭐⭐⭐⭐</span>
-                    <span>4.8 (62 reseñas)</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-            <!-- Grid de Negocios -->
-            <section>
-                <h2 style="margin-bottom: var(--spacing-md); font-size: 1.5rem;">Negocios Cerca de Ti</h2>
+                <!-- Negocios (US-042) -->
                 <div class="businesses-grid" id="businesses-grid">
                     <!-- Los negocios se cargarán dinámicamente -->
                 </div>
-            </section>
+            </div>
+
+            <!-- TAB: FAVORITOS (US-031) -->
+            <div class="tab-content" id="tab-favoritos">
+                <section class="favorites-section">
+                    <div class="section-header" style="margin-bottom: var(--spacing-lg);">
+                        <h2>Mis Negocios Favoritos</h2>
+                    </div>
+                    <div class="businesses-grid" id="favorites-grid">
+                        <!-- Los favoritos se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: RESERVAS (US-043) -->
+            <div class="tab-content" id="tab-reservas">
+                <section>
+                    <div class="section-header" style="margin-bottom: var(--spacing-lg);">
+                        <h2>Mis Reservas</h2>
+                    </div>
+                    <div id="reservations-list">
+                        <!-- Las reservas se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: RESEÑAS -->
+            <div class="tab-content" id="tab-resenas">
+                <section>
+                    <div class="section-header" style="margin-bottom: var(--spacing-lg);">
+                        <h2>Mis Reseñas</h2>
+                    </div>
+                    <div id="reviews-list">
+                        <!-- Las reseñas se cargarán dinámicamente -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: AYUDA (US-033) -->
+            <div class="tab-content" id="tab-ayuda">
+                <section class="help-section">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Centro de Ayuda</h2>
+                    
+                    <h3 style="margin-bottom: var(--spacing-md);">Preguntas Frecuentes</h3>
+                    <div class="faq-list" id="faq-list">
+                        <!-- Las FAQs se cargarán dinámicamente -->
+                    </div>
+
+                    <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background-color: var(--color-background); border-radius: var(--border-radius-lg); text-align: center;">
+                        <h3 style="margin-bottom: var(--spacing-sm);">¿No encontraste lo que buscabas?</h3>
+                        <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                            Envíanos un comentario y te responderemos pronto
+                        </p>
+                        <button class="btn btn--primary" id="contact-support-btn">
+                            📧 Contactar Soporte
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- TAB: PERFIL (US-035) -->
+            <div class="tab-content" id="tab-perfil">
+                <section class="user-profile-section">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Mi Perfil</h2>
+                    
+                    <form class="profile-form" id="profile-form">
+                        <div class="form__group">
+                            <label class="form__label">Nombre completo</label>
+                            <input type="text" class="form__input" id="profile-name" value="Cliente SUMAK">
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label">Correo electrónico</label>
+                            <input type="email" class="form__input" id="profile-email" value="cliente@ejemplo.com">
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label">Teléfono</label>
+                            <input type="tel" class="form__input" id="profile-phone" value="999 888 777">
+                        </div>
+                        <div class="form__group">
+                            <label class="form__label">Ubicación</label>
+                            <input type="text" class="form__input" id="profile-location" value="Lima, Perú">
+                        </div>
+
+                        <div style="display: flex; gap: var(--spacing-sm); margin-top: var(--spacing-md);">
+                            <button type="submit" class="btn btn--primary">Guardar cambios</button>
+                            <button type="button" class="btn btn--outline" style="color: var(--color-error);" id="delete-account-btn">
+                                Eliminar cuenta
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <!-- DETALLE DE NEGOCIO (US-029, US-030, US-038, US-041) -->
+            <div class="tab-content" id="tab-business-detail">
+                <button class="btn btn--outline" style="margin-bottom: var(--spacing-md);" onclick="goBackToExplore()">
+                    ← Volver a explorar
+                </button>
+
+                <div class="business-detail__header" id="detail-header">
+                    <div class="business-detail__info">
+                        <h1 class="business-detail__name" id="detail-name">Nombre del Negocio</h1>
+                        <p id="detail-category">Categoría</p>
+                        <div class="business-detail__badges" id="detail-badges">
+                            <!-- Badges de confianza -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="business-detail__content">
+                    <div class="business-detail__main">
+                        <!-- Historia del emprendedor (US-038) -->
+                        <div class="entrepreneur-story">
+                            <h3 style="margin-bottom: var(--spacing-md);">📖 Conoce su historia</h3>
+                            <p class="entrepreneur-story__quote" id="detail-story">
+                                "Cargando historia del emprendedor..."
+                            </p>
+                            <div class="entrepreneur-story__author">
+                                <div class="entrepreneur-story__avatar" id="detail-avatar">ML</div>
+                                <div>
+                                    <strong id="detail-owner">Nombre del dueño</strong>
+                                    <p style="font-size: var(--font-size-small); color: var(--color-text-tertiary);">Fundador</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Catálogo (US-041) -->
+                        <div class="detail-section">
+                            <h3 class="detail-section__title">🛒 Catálogo de Productos</h3>
+                            <div class="catalog-grid" id="detail-catalog">
+                                <!-- Productos se cargan dinámicamente -->
+                            </div>
+                        </div>
+
+                        <!-- Reseñas -->
+                        <div class="detail-section">
+                            <h3 class="detail-section__title">⭐ Reseñas de clientes</h3>
+                            <div id="detail-reviews">
+                                <!-- Reseñas se cargan dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="business-detail__sidebar">
+                        <!-- Acciones -->
+                        <div class="detail-section">
+                            <h3 class="detail-section__title">Acciones</h3>
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-sm);">
+                                <button class="btn btn--primary" id="btn-favorite-detail">
+                                    ❤️ Agregar a favoritos
+                                </button>
+                                <button class="btn btn--outline" onclick="openShareModal()">
+                                    🔗 Compartir
+                                </button>
+                                <button class="btn btn--outline" id="btn-contact-business">
+                                    💬 Contactar por WhatsApp
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Reservar cita (US-043) -->
+                        <div class="booking-section">
+                            <h3 class="detail-section__title">📅 Reservar cita</h3>
+                            <div class="booking-calendar" id="booking-calendar">
+                                <!-- Calendario se genera dinámicamente -->
+                            </div>
+                            <h4 style="margin-bottom: var(--spacing-sm);">Horarios disponibles:</h4>
+                            <div class="booking-times" id="booking-times">
+                                <!-- Horarios se cargan dinámicamente -->
+                            </div>
+                            <button class="btn btn--primary" style="width: 100%; margin-top: var(--spacing-md);" id="confirm-booking-btn">
+                                Confirmar reserva
+                            </button>
+                        </div>
+
+                        <!-- Información de contacto -->
+                        <div class="detail-section">
+                            <h3 class="detail-section__title">📍 Contacto</h3>
+                            <div style="display: flex; flex-direction: column; gap: var(--spacing-sm); color: var(--color-text-secondary);">
+                                <p id="detail-address">📍 Dirección</p>
+                                <p id="detail-phone">📞 Teléfono</p>
+                                <p id="detail-hours">🕐 Horario</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
+    <!-- Modal: Compartir (US-032) -->
+    <div class="modal" id="share-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h2 class="modal__title">Compartir este negocio</h2>
+                <button class="modal__close" onclick="closeModal('share-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <p style="margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">
+                    Recomienda este emprendedor a tus amigos y familiares
+                </p>
+                <div class="share-actions">
+                    <button class="share-btn" onclick="shareViaWhatsApp()">
+                        💬 WhatsApp
+                    </button>
+                    <button class="share-btn" onclick="shareViaEmail()">
+                        📧 Correo
+                    </button>
+                    <button class="share-btn" onclick="shareViaFacebook()">
+                        📘 Facebook
+                    </button>
+                    <button class="share-btn" onclick="copyLink()">
+                        🔗 Copiar enlace
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Contactar Soporte (US-033) -->
+    <div class="modal" id="support-modal">
+        <div class="modal__overlay"></div>
+        <div class="modal__container">
+            <div class="modal__header">
+                <h2 class="modal__title">Contactar Soporte</h2>
+                <button class="modal__close" onclick="closeModal('support-modal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <form id="support-form">
+                    <div class="form__group">
+                        <label class="form__label">Tipo de consulta</label>
+                        <select class="form__input">
+                            <option value="">Selecciona una opción</option>
+                            <option value="problema">Problema técnico</option>
+                            <option value="sugerencia">Sugerencia</option>
+                            <option value="queja">Queja</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label">Mensaje</label>
+                        <textarea class="form__input" rows="5" placeholder="Describe tu consulta..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--outline" onclick="closeModal('support-modal')">Cancelar</button>
+                <button class="btn btn--primary" onclick="sendSupportMessage()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
-     <script src="assets/scripts/utils.js"></script>
+    <script src="assets/scripts/utils.js"></script>
     <script src="assets/scripts/dashboard.js"></script>
     <script>
-    // Script específico para cargar negocios
-    document.addEventListener('DOMContentLoaded', () => {
-        const businesses = [
-            { 
-                id: 1, 
-                name: 'Bodega La Esquina', 
-                category: 'comida', 
-                image: 'assets/images/bodega.png', // Imagen real
-                rating: 4.5, 
-                reviews: 32, 
-                certified: true, 
-                distance: '0.5 km', 
-                phone: '999-888-777', 
-                hours: 'Lun-Dom 7AM-11PM' 
-            },
-            { 
-                id: 2, 
-                name: 'Repostería Dulce María', 
-                category: 'comida', 
-                image: 'assets/images/Reposteria.png', 
-                rating: 4.8, 
-                reviews: 48, 
-                certified: true, 
-                distance: '1.2 km', 
-                phone: '999-777-666', 
-                hours: 'Lun-Sáb 8AM-8PM' 
-            },
-            { 
-                id: 3, 
-                name: 'Taller de Costura Ana', 
-                category: 'ropa', 
-                image: 'assets/images/costura.png', 
-                rating: 4.3, 
-                reviews: 21, 
-                certified: false, 
-                distance: '2.0 km', 
-                phone: '999-666-555', 
-                hours: 'Lun-Vie 9AM-6PM' 
-            },
-            { 
-                id: 4, 
-                name: 'Salón de Belleza Patricia', 
-                category: 'belleza', 
-                image: 'assets/images/salon.png', 
-                rating: 4.7, 
-                reviews: 56, 
-                certified: true, 
-                distance: '0.8 km', 
-                phone: '999-555-444', 
-                hours: 'Lun-Sáb 9AM-7PM' 
-            },
-            { 
-                id: 5, 
-                name: 'Ferretería Central', 
-                category: 'servicios', 
-                image: 'assets/images/ferreteria.png', 
-                rating: 4.2, 
-                reviews: 38, 
-                certified: true, 
-                distance: '1.5 km', 
-                phone: '999-444-333', 
-                hours: 'Lun-Dom 8AM-8PM' 
-            },
-            { 
-                id: 6, 
-                name: 'Boutique Lucy', 
-                category: 'ropa', 
-                image: 'assets/images/boutique.png', 
-                rating: 4.9, 
-                reviews: 35, 
-                certified: true, 
-                distance: '1.8 km', 
-                phone: '999-333-222', 
-                hours: 'Lun-Sáb 10AM-8PM' 
-            },
-            { 
-                id: 7, 
-                name: 'Imprenta Digital', 
-                category: 'tecnologia', 
-                image: 'assets/images/imprenta.png', 
-                rating: 4.6, 
-                reviews: 29, 
-                certified: true, 
-                distance: '2.2 km', 
-                phone: '999-222-111', 
-                hours: 'Lun-Vie 9AM-7PM' 
-            },
-            { 
-                id: 8, 
-                name: 'Artesanías del Perú', 
-                category: 'artesania', 
-                image: 'assets/images/artesania.png', 
-                rating: 4.4, 
-                reviews: 42, 
-                certified: false, 
-                distance: '3.0 km', 
-                phone: '999-111-000', 
-                hours: 'Lun-Sáb 10AM-6PM' 
-            }
-        ];
+        // ========================================
+        // FUNCIONALIDADES SPRINT 2 - CLIENTE
+        // ========================================
 
-        const businessesGrid = document.getElementById('businesses-grid');
-        let favoriteBusinesses = JSON.parse(localStorage.getItem('favorite_businesses')) || [];
+        let favoriteBusinesses = JSON.parse(localStorage.getItem('favorite_businesses') || '[]');
+        let currentBusinessId = null;
 
-        function renderBusinesses(filteredBusinesses = businesses) {
-            if (businessesGrid) {
-                businessesGrid.innerHTML = filteredBusinesses.map(business => `
-                    <article class="business-card" data-category="${business.category}" data-id="${business.id}">
-                        <div class="business-card__image" style="background-image: url('${business.image}'); background-size: cover; background-position: center;">
-                            ${business.certified ? `
-                                <span class="business-card__badge">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-                                        <polyline points="22 4 12 14.01 9 11.01"/>
-                                    </svg>
-                                    Certificado SUMAK
-                                </span>
-                            ` : ''}
-                            <button class="business-card__favorite ${favoriteBusinesses.includes(business.id) ? 'active' : ''}" 
-                                    onclick="toggleFavorite(event, ${business.id})">
-                                ${favoriteBusinesses.includes(business.id) ? '❤️' : '🤍'}
-                            </button>
-                        </div>
-                        <div class="business-card__content">
-                            <h3 class="business-card__name">${business.name}</h3>
-                            <span class="business-card__category">${getCategoryName(business.category)}</span>
-                            
-                            <div class="business-card__rating">
-                                <span class="business-card__stars">${renderStars(business.rating)}</span>
-                                <span>${business.rating} (${business.reviews} reseñas)</span>
-                            </div>
+        document.addEventListener('DOMContentLoaded', () => {
+            initTabs();
+            initSidebarNavigation();
+            loadBusinesses();
+            initFilters();
+            loadFAQs();
+            loadBookingCalendar();
+        });
 
-                            <div class="business-card__info">
-                                <div class="business-card__info-item">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-                                        <circle cx="12" cy="10" r="3"/>
-                                    </svg>
-                                    <span>${business.distance}</span>
-                                </div>
-                                <div class="business-card__info-item">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"/>
-                                        <polyline points="12 6 12 12 16 14"/>
-                                    </svg>
-                                    <span>${business.hours}</span>
-                                </div>
-                                <div class="business-card__info-item">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
-                                    </svg>
-                                    <span>${business.phone}</span>
-                                </div>
-                            </div>
+        // ========================================
+        // NAVEGACIÓN
+        // ========================================
 
-                            <div class="business-card__actions">
-                                <button class="btn btn--primary btn--small" onclick="viewBusinessDetail(${business.id})">
-                                    Ver Detalles
-                                </button>
-                                <button class="btn btn--outline btn--small" onclick="contactBusiness(${business.id})">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                                    </svg>
-                                    WhatsApp
-                                </button>
-                            </div>
-                        </div>
-                    </article>
-                `).join('');
+        function initTabs() {
+            const tabLinks = document.querySelectorAll('[data-tab]');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.dataset.tab;
+                    switchTab(tabId);
+                    updatePageTitle(tabId);
+                });
+            });
+        }
+
+        function initSidebarNavigation() {
+            const sidebarLinks = document.querySelectorAll('.sidebar__link[data-tab]');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const tabId = link.dataset.tab;
+                    sidebarLinks.forEach(l => l.classList.remove('sidebar__link--active'));
+                    link.classList.add('sidebar__link--active');
+                    switchTab(tabId);
+                    updatePageTitle(tabId);
+                });
+            });
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
             }
         }
 
-        renderBusinesses();
+        function updatePageTitle(tabId) {
+            const titles = {
+                'explorar': { title: 'Descubre Negocios Locales 🛍️', subtitle: 'Apoya a microemprendedores certificados en tu zona' },
+                'favoritos': { title: 'Mis Favoritos ❤️', subtitle: 'Negocios que has guardado' },
+                'reservas': { title: 'Mis Reservas 📅', subtitle: 'Gestiona tus citas programadas' },
+                'resenas': { title: 'Mis Reseñas ⭐', subtitle: 'Opiniones que has dejado' },
+                'ayuda': { title: 'Centro de Ayuda 🆘', subtitle: 'Resolvemos tus dudas' },
+                'perfil': { title: 'Mi Perfil 👤', subtitle: 'Gestiona tu información personal' }
+            };
+            const config = titles[tabId] || titles['explorar'];
+            document.getElementById('page-title').textContent = config.title;
+            document.getElementById('page-subtitle').textContent = config.subtitle;
+        }
 
-        // Resto del código igual...
-        const filterChips = document.querySelectorAll('.filter-chip');
-        filterChips.forEach(chip => {
-            chip.addEventListener('click', () => {
-                const category = chip.dataset.category;
-                
-                filterChips.forEach(c => c.classList.remove('active'));
-                chip.classList.add('active');
+        function goBackToExplore() {
+            switchTab('explorar');
+            updatePageTitle('explorar');
+        }
 
-                if (category === 'all') {
-                    renderBusinesses(businesses);
-                } else {
-                    const filtered = businesses.filter(b => b.category === category);
-                    renderBusinesses(filtered);
-                }
+        // ========================================
+        // NEGOCIOS (US-042)
+        // ========================================
+
+        const businesses = [
+            { id: 1, name: 'Tienda de Ropa "Mary"', category: 'ropa', rating: 4.8, reviews: 45, distance: '500m', hours: '9:00 - 18:00', phone: '999 111 222', certified: true, owner: 'María López', story: 'Empecé vendiendo ropa desde mi casa hace 5 años. Gracias a SUMAK aprendí a gestionar mejor mi negocio y ahora tengo mi propia tienda.' },
+            { id: 2, name: 'Restaurante "El Sabor"', category: 'comida', rating: 4.5, reviews: 120, distance: '1.2km', hours: '12:00 - 22:00', phone: '999 333 444', certified: true, owner: 'Juan Pérez', story: 'Heredé la receta de mi abuela y decidí compartirla con todos. Mi sueño es que todos prueben el auténtico sabor de casa.' },
+            { id: 3, name: 'Peluquería "Style"', category: 'belleza', rating: 4.7, reviews: 78, distance: '800m', hours: '10:00 - 20:00', phone: '999 555 666', certified: true, owner: 'Ana García', story: 'Comencé cortando el cabello a mis vecinos. Hoy tengo un salón donde cada cliente sale sintiéndose especial.' },
+            { id: 4, name: 'Taller Mecánico "Ruedas"', category: 'servicios', rating: 4.3, reviews: 34, distance: '2km', hours: '8:00 - 18:00', phone: '999 777 888', certified: false, owner: 'Carlos Ruiz', story: 'Aprendí de mi padre este oficio. Cada carro que arreglo es una familia que puedo ayudar.' },
+            { id: 5, name: 'Pastelería "Dulce Rosa"', category: 'comida', rating: 4.9, reviews: 89, distance: '600m', hours: '7:00 - 19:00', phone: '999 999 000', certified: true, owner: 'Rosa Martínez', story: 'Mi amor por la repostería comenzó horneando para mis hijos. Ahora endulzo la vida de toda la comunidad.' },
+            { id: 6, name: 'Artesanías del Norte', category: 'artesania', rating: 4.6, reviews: 56, distance: '1.5km', hours: '9:00 - 17:00', phone: '999 123 456', certified: true, owner: 'Pedro Sánchez', story: 'Mis manos crean lo que mi corazón siente. Cada pieza cuenta la historia de mi pueblo.' }
+        ];
+
+        function loadBusinesses() {
+            renderBusinesses(businesses);
+            loadFavorites();
+        }
+
+        function renderBusinesses(businessList) {
+            const grid = document.getElementById('businesses-grid');
+            if (!grid) return;
+
+            if (businessList.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: var(--spacing-2xl); color: var(--color-text-secondary);">
+                        <h3>No se encontraron negocios</h3>
+                        <p>Intenta con otros filtros o términos de búsqueda</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = businessList.map(business => `
+                <article class="business-card" data-category="${business.category}" data-id="${business.id}">
+                    <div class="business-card__image">
+                        🏪
+                        ${business.certified ? `
+                            <span class="business-card__badge">
+                                ✓ Certificado SUMAK
+                            </span>
+                        ` : ''}
+                        <button class="business-card__favorite ${favoriteBusinesses.includes(business.id) ? 'active' : ''}" 
+                                onclick="toggleFavorite(event, ${business.id})">
+                            ${favoriteBusinesses.includes(business.id) ? '❤️' : '🤍'}
+                        </button>
+                    </div>
+                    <div class="business-card__content">
+                        <h3 class="business-card__name">${business.name}</h3>
+                        <span class="business-card__category">${getCategoryName(business.category)}</span>
+                        
+                        <div class="business-card__rating">
+                            <span class="business-card__stars">${renderStars(business.rating)}</span>
+                            <span>${business.rating} (${business.reviews} reseñas)</span>
+                        </div>
+
+                        <div class="business-card__info">
+                            <div class="business-card__info-item">
+                                📍 <span>${business.distance}</span>
+                            </div>
+                            <div class="business-card__info-item">
+                                🕐 <span>${business.hours}</span>
+                            </div>
+                        </div>
+
+                        <div class="business-card__actions">
+                            <button class="btn btn--primary btn--small" onclick="viewBusinessDetail(${business.id})">
+                                Ver Detalles
+                            </button>
+                            <button class="btn btn--outline btn--small" onclick="contactBusiness(${business.id})">
+                                💬 WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // ========================================
+        // US-044: FILTROS
+        // ========================================
+
+        function initFilters() {
+            const filterChips = document.querySelectorAll('.filter-chip');
+            filterChips.forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const category = chip.dataset.category;
+                    filterChips.forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+
+                    if (category === 'all') {
+                        renderBusinesses(businesses);
+                    } else {
+                        const filtered = businesses.filter(b => b.category === category);
+                        renderBusinesses(filtered);
+                    }
+                });
             });
+        }
+
+        function searchBusinesses() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            if (!query) {
+                renderBusinesses(businesses);
+                return;
+            }
+            const filtered = businesses.filter(b => 
+                b.name.toLowerCase().includes(query) ||
+                b.category.toLowerCase().includes(query)
+            );
+            renderBusinesses(filtered);
+        }
+
+        document.getElementById('search-input')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchBusinesses();
         });
 
-        window.toggleFavorite = function(event, businessId) {
+        // ========================================
+        // US-029/US-030/US-038/US-041: DETALLE
+        // ========================================
+
+        function viewBusinessDetail(businessId) {
+            const business = businesses.find(b => b.id === businessId);
+            if (!business) return;
+
+            currentBusinessId = businessId;
+
+            document.getElementById('detail-name').textContent = business.name;
+            document.getElementById('detail-category').textContent = getCategoryName(business.category);
+            document.getElementById('detail-story').textContent = '"' + business.story + '"';
+            document.getElementById('detail-owner').textContent = business.owner;
+            document.getElementById('detail-avatar').textContent = getInitials(business.owner);
+            document.getElementById('detail-phone').textContent = '📞 ' + business.phone;
+            document.getElementById('detail-hours').textContent = '🕐 ' + business.hours;
+            document.getElementById('detail-address').textContent = '📍 A ' + business.distance + ' de tu ubicación';
+
+            // Badges de confianza (US-030)
+            let badgesHtml = '';
+            if (business.certified) {
+                badgesHtml += '<span class="trust-badge">✓ Emprendedor Capacitado</span>';
+            }
+            if (business.rating >= 4.5) {
+                badgesHtml += '<span class="trust-badge">⭐ Bien valorado</span>';
+            }
+            document.getElementById('detail-badges').innerHTML = badgesHtml;
+
+            // Catálogo (US-041)
+            const products = [
+                { name: 'Producto 1', price: 'S/ 25.00' },
+                { name: 'Producto 2', price: 'S/ 30.00' },
+                { name: 'Producto 3', price: 'S/ 45.00' },
+                { name: 'Producto 4', price: 'S/ 20.00' }
+            ];
+            document.getElementById('detail-catalog').innerHTML = products.map(p => `
+                <div class="catalog-item">
+                    <div class="catalog-item__image">📦</div>
+                    <div class="catalog-item__content">
+                        <div class="catalog-item__name">${p.name}</div>
+                        <div class="catalog-item__price">${p.price}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Botón favorito
+            const favBtn = document.getElementById('btn-favorite-detail');
+            if (favoriteBusinesses.includes(businessId)) {
+                favBtn.textContent = '💔 Quitar de favoritos';
+            } else {
+                favBtn.textContent = '❤️ Agregar a favoritos';
+            }
+            favBtn.onclick = () => toggleFavoriteDetail(businessId);
+
+            switchTab('business-detail');
+        }
+
+        // ========================================
+        // US-031: FAVORITOS
+        // ========================================
+
+        function toggleFavorite(event, businessId) {
             event.stopPropagation();
             const button = event.currentTarget;
             
@@ -798,75 +1498,198 @@
                 button.textContent = '❤️';
                 showToast('Agregado a favoritos ♥', 'success');
             }
-
             localStorage.setItem('favorite_businesses', JSON.stringify(favoriteBusinesses));
-        };
+            loadFavorites();
+        }
 
-        window.viewBusinessDetail = function(businessId) {
-            const business = businesses.find(b => b.id === businessId);
-            if (business) {
-                showToast('Abriendo ' + business.name + '...', 'info');
+        function toggleFavoriteDetail(businessId) {
+            if (favoriteBusinesses.includes(businessId)) {
+                favoriteBusinesses = favoriteBusinesses.filter(id => id !== businessId);
+                document.getElementById('btn-favorite-detail').textContent = '❤️ Agregar a favoritos';
+                showToast('Eliminado de favoritos', 'info');
+            } else {
+                favoriteBusinesses.push(businessId);
+                document.getElementById('btn-favorite-detail').textContent = '💔 Quitar de favoritos';
+                showToast('Agregado a favoritos ♥', 'success');
             }
-        };
+            localStorage.setItem('favorite_businesses', JSON.stringify(favoriteBusinesses));
+            loadFavorites();
+        }
 
-        window.contactBusiness = function(businessId) {
-            const business = businesses.find(b => b.id === businessId);
-            if (business) {
-                showToast(' Abriendo WhatsApp ' + business.name + '...', '_blank');
-            }
-        };
+        function loadFavorites() {
+            const grid = document.getElementById('favorites-grid');
+            if (!grid) return;
 
-        window.searchBusinesses = function() {
-            const searchInput = document.getElementById('search-input');
-            const query = searchInput.value.toLowerCase().trim();
-
-            if (!query) {
-                renderBusinesses(businesses);
-                return;
-            }
-
-            const filtered = businesses.filter(b => 
-                b.name.toLowerCase().includes(query) ||
-                b.category.toLowerCase().includes(query)
-            );
-
-            if (filtered.length === 0) {
-                businessesGrid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: var(--spacing-3xl); color: var(--color-text-secondary);">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto var(--spacing-md);">
-                            <circle cx="11" cy="11" r="8"/>
-                            <path d="M21 21l-4.35-4.35"/>
-                        </svg>
-                        <h3 style="margin-bottom: var(--spacing-sm);">No encontramos resultados</h3>
-                        <p>Intenta con otros términos de búsqueda</p>
+            const favBusinesses = businesses.filter(b => favoriteBusinesses.includes(b.id));
+            
+            if (favBusinesses.length === 0) {
+                grid.innerHTML = `
+                    <div class="favorites-empty" style="grid-column: 1 / -1;">
+                        <h3>No tienes favoritos aún</h3>
+                        <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-md);">
+                            Explora negocios y guarda los que más te gusten
+                        </p>
+                        <button class="btn btn--primary" data-tab="explorar">Explorar negocios</button>
                     </div>
                 `;
             } else {
-                renderBusinesses(filtered);
+                renderBusinessesToContainer(favBusinesses, grid);
             }
-        };
+        }
 
-        document.getElementById('search-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchBusinesses();
+        function renderBusinessesToContainer(businessList, container) {
+            container.innerHTML = businessList.map(business => `
+                <article class="business-card" data-id="${business.id}">
+                    <div class="business-card__image">
+                        🏪
+                        ${business.certified ? '<span class="business-card__badge">✓ Certificado</span>' : ''}
+                        <button class="business-card__favorite active" onclick="toggleFavorite(event, ${business.id})">❤️</button>
+                    </div>
+                    <div class="business-card__content">
+                        <h3 class="business-card__name">${business.name}</h3>
+                        <span class="business-card__category">${getCategoryName(business.category)}</span>
+                        <div class="business-card__rating">
+                            <span class="business-card__stars">${renderStars(business.rating)}</span>
+                            <span>${business.rating}</span>
+                        </div>
+                        <div class="business-card__actions">
+                            <button class="btn btn--primary btn--small" onclick="viewBusinessDetail(${business.id})">Ver Detalles</button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // ========================================
+        // US-032: COMPARTIR
+        // ========================================
+
+        function openShareModal() {
+            openModal('share-modal');
+        }
+
+        function shareViaWhatsApp() {
+            const business = businesses.find(b => b.id === currentBusinessId);
+            const text = encodeURIComponent('¡Te recomiendo este negocio en SUMAK! ' + business?.name);
+            window.open('https://wa.me/?text=' + text, '_blank');
+            closeModal('share-modal');
+        }
+
+        function shareViaEmail() {
+            const business = businesses.find(b => b.id === currentBusinessId);
+            window.location.href = 'mailto:?subject=Te recomiendo este negocio&body=Mira este negocio en SUMAK: ' + business?.name;
+            closeModal('share-modal');
+        }
+
+        function shareViaFacebook() {
+            showToast('Abriendo Facebook...', 'info');
+            closeModal('share-modal');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText('https://sumak.pe/negocio/' + currentBusinessId).then(() => {
+                showToast('📋 Enlace copiado', 'success');
+            });
+            closeModal('share-modal');
+        }
+
+        // ========================================
+        // US-033: AYUDA / FAQ
+        // ========================================
+
+        function loadFAQs() {
+            const faqs = [
+                { q: '¿Cómo puedo encontrar negocios cerca de mí?', a: 'Usa la barra de búsqueda o los filtros por categoría para encontrar negocios en tu zona.' },
+                { q: '¿Qué significa el badge "Certificado SUMAK"?', a: 'Significa que el emprendedor ha completado capacitaciones en nuestra plataforma y cumple con estándares de calidad.' },
+                { q: '¿Cómo puedo reservar una cita?', a: 'Entra al perfil del negocio y usa el calendario para seleccionar fecha y hora disponible.' },
+                { q: '¿Puedo dejar una reseña?', a: 'Sí, después de visitar un negocio podrás dejar tu opinión y calificación.' }
+            ];
+
+            const container = document.getElementById('faq-list');
+            if (!container) return;
+
+            container.innerHTML = faqs.map((faq, index) => `
+                <div class="faq-item" onclick="toggleFAQ(${index})">
+                    <div class="faq-item__question">
+                        <span>${faq.q}</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-item__answer">${faq.a}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFAQ(index) {
+            const items = document.querySelectorAll('.faq-item');
+            items[index].classList.toggle('open');
+        }
+
+        document.getElementById('contact-support-btn')?.addEventListener('click', () => {
+            openModal('support-modal');
+        });
+
+        function sendSupportMessage() {
+            showToast('✅ Mensaje enviado. Te responderemos pronto.', 'success');
+            closeModal('support-modal');
+        }
+
+        // ========================================
+        // US-043: RESERVAS
+        // ========================================
+
+        function loadBookingCalendar() {
+            const calendar = document.getElementById('booking-calendar');
+            const times = document.getElementById('booking-times');
+            if (!calendar || !times) return;
+
+            const days = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+            let html = days.map(d => `<div class="booking-day-header">${d}</div>`).join('');
+            
+            for (let i = 1; i <= 28; i++) {
+                const isAvailable = Math.random() > 0.3;
+                html += `<div class="booking-day ${isAvailable ? '' : 'unavailable'}" onclick="${isAvailable ? 'selectDay(' + i + ')' : ''}">${i}</div>`;
+            }
+            calendar.innerHTML = html;
+
+            const availableTimes = ['9:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
+            times.innerHTML = availableTimes.map(t => `
+                <button class="booking-time" onclick="selectTime(this)">${t}</button>
+            `).join('');
+        }
+
+        function selectDay(day) {
+            document.querySelectorAll('.booking-day').forEach(d => d.classList.remove('selected'));
+            event.target.classList.add('selected');
+        }
+
+        function selectTime(element) {
+            document.querySelectorAll('.booking-time').forEach(t => t.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        document.getElementById('confirm-booking-btn')?.addEventListener('click', () => {
+            showToast('✅ Reserva confirmada. Te esperamos!', 'success');
+        });
+
+        // ========================================
+        // US-035: PERFIL
+        // ========================================
+
+        document.getElementById('profile-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast('✅ Perfil actualizado', 'success');
+        });
+
+        document.getElementById('delete-account-btn')?.addEventListener('click', () => {
+            if (confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.')) {
+                showToast('Cuenta eliminada. Hasta pronto.', 'info');
+                logout();
             }
         });
 
-        function renderStars(rating) {
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            let stars = '';
-
-            for (let i = 0; i < fullStars; i++) {
-                stars += '⭐';
-            }
-
-            if (hasHalfStar) {
-                stars += '✨';
-            }
-
-            return stars;
-        }
+        // ========================================
+        // UTILIDADES
+        // ========================================
 
         function getCategoryName(category) {
             const categories = {
@@ -879,7 +1702,51 @@
             };
             return categories[category] || category;
         }
-    });
-</script>
+
+        function renderStars(rating) {
+            return '⭐'.repeat(Math.floor(rating));
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+        }
+
+        function contactBusiness(businessId) {
+            const business = businesses.find(b => b.id === businessId);
+            if (business) {
+                window.open('https://wa.me/51' + business.phone.replace(/\s/g, ''), '_blank');
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId)?.classList.add('modal--active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId)?.classList.remove('modal--active');
+            document.body.style.overflow = '';
+        }
+
+        // Cerrar modales con overlay
+        document.querySelectorAll('.modal__overlay').forEach(overlay => {
+            overlay.addEventListener('click', () => {
+                overlay.closest('.modal').classList.remove('modal--active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // User menu
+        document.getElementById('user-menu-toggle')?.addEventListener('click', () => {
+            document.getElementById('user-menu')?.classList.toggle('is-open');
+        });
+
+        document.getElementById('logout-btn')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('¿Cerrar sesión?')) {
+                logout();
+            }
+        });
+    </script>
 </body>
 </html>
